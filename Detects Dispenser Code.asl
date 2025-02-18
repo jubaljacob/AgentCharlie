@@ -41,7 +41,7 @@ random_dir(DirList,RandomNumber,Dir) :- (RandomNumber <= 0.25 & .nth(0,DirList,D
 
 +actionID(X) : true <- 
 	!move_random.
-	// skip.
+//	skip.
 
 +!move_random : .random(RandomNumber) & random_dir([n,s,e,w],RandomNumber,Dir)
 <-	move(Dir).
