@@ -19,8 +19,10 @@ position(0,0).
 	!move_random.
 //	skip.
 
-+!move_random : .random(RandomNumber) & random_dir([n,s,e,w],RandomNumber,Dir)
-<-	
++!move_random : .random(RandomNumber) & random_dir([n,s,e,w],RandomNumber,Dir) & thing(Xthing, Ything, dispenser, Parameters)[entity(ConnectionA),source(percept)]
+<-	.print("Dispenser at X: ", Xthing, ", Y:", Ything );
+	move(Dir).
+
 +!move_random : .random(RandomNumber) & random_dir([n,s,e,w],RandomNumber,Dir)
 <-	if (Dir == w) {-position(X,Y); +position(X-1,Y);}
 	elif (Dir == e) {-position(X,Y); +position(X+1,Y);}
