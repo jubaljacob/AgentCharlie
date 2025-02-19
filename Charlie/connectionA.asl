@@ -24,9 +24,10 @@ position(0,0).
 	move(Dir).
 
 +!move_random : .random(RandomNumber) & random_dir([n,s,e,w],RandomNumber,Dir)
-<-	if (Dir == w) {-position(X,Y); +position(X-1,Y);}
-	elif (Dir == e) {-position(X,Y); +position(X+1,Y);}
-	elif (Dir == s) {-position(X,Y); +position(X,Y+1);}
-	elif (Dir == n) {-position(X,Y); +position(X,Y-1);}
-	.print("X: ", X, ", Y:", Y );
+<-	-position(X,Y);
+	if (Dir == w) {+position(X-1,Y);}
+	elif (Dir == e) {+position(X+1,Y);}
+	elif (Dir == s) {+position(X,Y+1);}
+	elif (Dir == n) {+position(X,Y-1);}
+	.print("Agent at X: ", X, ", Y:", Y );
 	move(Dir).
