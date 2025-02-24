@@ -1,25 +1,33 @@
-public class CheckItem extends DefaultInternalAction implements instance {
+package charlie;
+
+import jason.JasonException;
+import jason.NoValueException;
+import jason.asSyntax.*;
+import jason.environment.Environment;
+import jason.asSemantics.*;
+import java.util.ArrayList;
+import massim.eismassim.EnvironmentInterface;
+
+import SharedMemory;
+
+public class CheckItem extends DefaultInternalAction {
     
-    private Logger logger = Logger.getLogger("ObjectTerm." + CheckItem.class.getName());
+    // @Override
+    // public Object execute(TransitionSystem ts, Unifier un, Term[] args) throws Exception {
+    //     try {
+    //         if (testList == null) {
+    //             logger.warning("testList is null.");
+    //             return false;
+    //         }
 
-    @Override
-    public Object execute(TransitionSystem ts, Unifier un, Term[] args) throws Exception {
-        try {
-            if (testList == null) {
-                logger.warning("testList is null.");
-                return false;
-            }
-
-            String size = testList.size().toString();
-            logger.info("Size of testList: " + size);
-            System.err.println("HAHAHAHAHAHAHHAHAHAHAHAHAHAHHAHA SIZE: " + size);
+    //         String size = testList.size().toString();
+    //         System.err.println("HAHAHAHAHAHAHHAHAHAHAHAHAHAHHAHA SIZE: " + size);
             
-            Term t = new ObjectTermImpl(new String(size));
-            return un.unifies(args[0], t);
-        } catch (Exception e) {
-            logger.warning("Error in internal action: " + e.getMessage());
-            e.printStackTrace();
-        }
-        return false;
-    }
+    //         Term t = new ObjectTermImpl(new String(size));
+    //         return un.unifies(args[0], t);
+    //     } catch (Exception e) {
+    //         System.err.println("Error in internal action: " + e.getMessage());
+    //     }
+    //     return false;
+    // }
 }
