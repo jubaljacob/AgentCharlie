@@ -1,4 +1,4 @@
-package charlie;
+package strategy;
 
 import jason.JasonException;
 import jason.NoValueException;
@@ -18,10 +18,10 @@ public class AddMapItem extends DefaultInternalAction {
     @Override
     public Object execute(TransitionSystem ts, Unifier un, Term[] args) throws Exception {
         try {
-            Integer xCoordinate = args[0];
-            Integer yCoordinate = args[1];
-            String details = args[2];
-            String type = args[3];
+            Integer xCoordinate = (int) ((NumberTerm) args[0]).solve();
+            Integer yCoordinate = (int) ((NumberTerm) args[1]).solve();
+            String details = args[2].toString();
+            String type = args[3].toString();
             String agentName = ts.getUserAgArch().getAgName();
             
             Map newMemory = new Map.Builder()

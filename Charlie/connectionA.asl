@@ -29,7 +29,8 @@ random_dir(DirList,RandomNumber,Dir) :- (RandomNumber <= 0.25 & .nth(0,DirList,D
 <-  move(Dir).
 
 +!process_things(Type) : thing(X, Y, dispenser, Type)
-<- !move_to_dispenser(X,Y).
+<-  strategy.AddMapItem(X,Y,dispenser,Type);
+    !move_to_dispenser(X,Y).
 
 +adjacent(X, Y) : (X = 0 & (Y = -1 | Y = 1)) | (Y = 0 & (X = -1 | X = 1)).
 

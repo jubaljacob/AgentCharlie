@@ -1,4 +1,4 @@
-package charlie;
+package strategy;
 
 public class Map {
     private int xCoordinate;
@@ -6,6 +6,14 @@ public class Map {
     private String details;
     private String type;
     private String agentName;
+
+    Map(Builder builder) {
+        this.xCoordinate = builder.xCoordinate;
+        this.yCoordinate = builder.yCoordinate;
+        this.details = builder.details;
+        this.type = builder.type;
+        this.agentName = builder.agentName;
+    }
 
     public int getXCoordinate() {
         return xCoordinate;

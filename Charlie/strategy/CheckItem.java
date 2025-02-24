@@ -1,4 +1,4 @@
-package charlie;
+package strategy;
 
 import jason.JasonException;
 import jason.NoValueException;
