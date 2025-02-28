@@ -1,5 +1,5 @@
 
-+obstacle_detected(X,Y) : current_position(CX,CY) & (count_gridLoc(obstacle,N) & N == 0) <- 
++obstacle_detected(X,Y) : current_position(CX,CY) & .count(location(obstacle,_,_,_),N) & (N == 0) <- 
     +gridLoc(obstacle,_,(CX+X),(CY+Y));
     +determine_direction(CX+X, CY+Y);
     .print("Obstacle registered at ",(CX+X),",",(CY+Y)).
