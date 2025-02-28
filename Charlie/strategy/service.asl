@@ -13,18 +13,18 @@ check_direction(0, 0, null).
 check_direction(_, _, e).
 
 // When agent is adjacent, no next direction
-next_direction(0, 1, null).
-next_direction(0, -1, null).
-next_direction(1, 0, null).
-next_direction(-1, 0, null).
+to_dispenser_direction(0, 1, null).
+to_dispenser_direction(0, -1, null).
+to_dispenser_direction(1, 0, null).
+to_dispenser_direction(-1, 0, null).
 // When agent is at location, move to adjacent (east)
-next_direction(0, 0, e).
+to_dispenser_direction(0, 0, e).
 // Condition 1: When agent is at the corner, move to adjacent position X = 1/-1
 // Condition 2: Agent always move X position to location, then move Y
-next_direction(X, Y, e):- X >= 1.
-next_direction(X, Y, w):- X =< -1.
-next_direction(X, Y, s):- Y > 1.
-next_direction(X, Y, n):- Y < -1.
+to_dispenser_direction(X, Y, e):- X >= 1.
+to_dispenser_direction(X, Y, w):- X =< -1.
+to_dispenser_direction(X, Y, s):- Y > 1.
+to_dispenser_direction(X, Y, n):- Y < -1.
 
 // Directions to rotate
 rotate_angle(n, e, cw).
