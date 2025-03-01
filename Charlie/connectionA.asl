@@ -1,5 +1,5 @@
 
-{ include("strategy/navigation.asl") }
+{ include("strategy/explore.asl") }
 { include("strategy/obstacle_detection.asl") }
 { include("strategy/rotate.asl") }
 { include("strategy/service.asl") }
@@ -9,7 +9,7 @@
 // Initial beliefs
 
 agent_pos(0,0).
-state(navigation).
+state(explore).
 dirch_step(0,cw).
 step_count(0).
 
@@ -22,7 +22,7 @@ step_count(0).
 +!start : true <-
 	.print("Hello massim world.").
 
-// 【step】 Try to query free_task for a task. The task is deleted from free_task after a successful fetch. 
+// //【step】 Try to query free_task for a task. The task is deleted from free_task after a successful fetch. 
 // +step(S) : free_task(Name, Deadline, Rew,X,Y,Type) <-
 // 	-free_task(Name, Deadline, Rew,X,Y,Type);
 //     if(?lastAction(move)){
@@ -30,15 +30,35 @@ step_count(0).
 //         -+step_count(S);
 //     }.
     
-+step(X) : lastAction(move) & step_count(Count) <-
++step(S) : lastAction(move) & step_count(Count) <-
     -+step_count(Count+1).
 
 // 【actionID】 If not, choose to execute an appropriate plan.
-+actionID(ID) : state(navigation) <- 
-	!navigation.
++actionID(ID) : state(X) & X == explore <- 
+	!explore.
 
 
++actionID(ID) : state(X) & X == find_blocks <- 
+    .print("Agent is in state ",X);
+	!explore.
 
++thing(X, Y, dispenser, Type) : 
+    agent_pos(X0,Y0) <-
+    
+	+location(dispenser,Type,(X0+X),(Y0+Y)).
+
++thing(X, Y, goal, Type) : 
+    agent_pos(X0,Y0) <-
+    
+	+location(goal,Type,(X0+X),(Y0+Y)).
+    
+
++goal(X,Y) :  
+    agent_pos(X0,Y0) <- 
+    
+	+location(goal,null,(X0+X),(Y0+Y));
+    .print("Goal detected at ",X,",",Y).
+ 
 // +actionID(ID) :  state(find_blocks) & target_dispenser(Type,X,Y) <-
 // 	!move_to_dispenser(X,Y,Type).
 

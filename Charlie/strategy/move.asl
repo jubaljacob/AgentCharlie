@@ -31,7 +31,7 @@
 -!move_to_dispenser(X,Y,Type) : 
     self_location(X_self, Y_self) <-
 
-    !navigation.
+    !explore.
 
 // When agent is adjacent to dispenser, initiate request
 @move_to_dispenser_request

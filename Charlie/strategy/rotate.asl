@@ -42,7 +42,7 @@
 
     detach(B_Dir);
     -block(B_Dir, Type);
-    +state(navigation).
+    +state(explore).
 
 // Prioritized intention to update beliefs of block & free direction
 @change_block_dir[atomic]
