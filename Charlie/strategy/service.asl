@@ -26,16 +26,12 @@ to_dispenser_direction(X, Y, w):- X =< -1.
 to_dispenser_direction(X, Y, s):- Y > 1.
 to_dispenser_direction(X, Y, n):- Y < -1.
 
-// Directions to rotate
-rotate_angle(n, e, cw).
-rotate_angle(s, w, cw).
-rotate_angle(e, s, cw).
-rotate_angle(w, n, cw).
-
-rotate_angle(n, w, ccw).
-rotate_angle(s, e, ccw).
-rotate_angle(e, n, ccw).
-rotate_angle(w, s, ccw).
-
+// Directions to rotate n(0) -> e(1) -> s(2) -> w(3), if From > To, then clockwise
+direction(n, 0).
+direction(e, 1).
+direction(s, 2).
+direction(w, 3).
+rotation(F, T, cw) :- (T - F + 4) mod 4 < (F - T + 4) mod 4.
+rotation(F, T, ccw) :- (T - F + 4) mod 4 > (F - T + 4) mod 4.
 // Non-defined direction transitions
-rotate_dir(_, _, null).
+rotation(_, _, null).
