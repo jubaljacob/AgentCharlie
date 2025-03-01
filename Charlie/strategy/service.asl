@@ -35,6 +35,19 @@ rotation(F, T, cw) :- (T - F + 4) mod 4 < (F - T + 4) mod 4.
 rotation(F, T, ccw) :- (T - F + 4) mod 4 > (F - T + 4) mod 4.
 // Non-defined direction transitions
 rotation(_, _, null).
+// Get new direction after rotating(cw/ccw)
+rotating_dir(w, n, cw).
+rotating_dir(n, w, ccw).
+rotating_dir(F_Dir, T_Dir, cw) :- direction(F_Dir, F_Idx) & direction(T_Dir, F_Idx+1).
+rotating_dir(F_Dir, T_Dir, ccw) :- direction(F_Dir, F_Idx) & direction(T_Dir, F_Idx-1).
+
+
+// Wrapper of rotation for agent rotating for goal submission > 90 degrees
+goal_rotation(X, Y, Dir) :- rotation(X, Y, Dir) & not (Dir == null).
+goal_rotation(_, _, Dir) :- Dir = ccw.
+
+obstacle_rotation(cw, ccw).
+obstacle_rotation(ccw, cw).
 
 to_goal_direction(X,_,w) :- X < 0.
 to_goal_direction(X,_,e) :- X > 0.
