@@ -21,10 +21,10 @@ to_dispenser_direction(-1, 0, null).
 to_dispenser_direction(0, 0, e).
 // Condition 1: When agent is at the corner, move to adjacent position X = 1/-1
 // Condition 2: Agent always move X position to location, then move Y
-to_dispenser_direction(X, Y, e):- X >= 1.
-to_dispenser_direction(X, Y, w):- X =< -1.
-to_dispenser_direction(X, Y, s):- Y > 1.
-to_dispenser_direction(X, Y, n):- Y < -1.
+to_dispenser_direction(X, _, e):- X >= 1.
+to_dispenser_direction(X, _, w):- X =< -1.
+to_dispenser_direction(_, Y, s):- Y > 1.
+to_dispenser_direction(_, Y, n):- Y < -1.
 
 // Directions to rotate n(0) -> e(1) -> s(2) -> w(3), if From > To, then clockwise
 direction(n, 0).
@@ -35,3 +35,9 @@ rotation(F, T, cw) :- (T - F + 4) mod 4 < (F - T + 4) mod 4.
 rotation(F, T, ccw) :- (T - F + 4) mod 4 > (F - T + 4) mod 4.
 // Non-defined direction transitions
 rotation(_, _, null).
+
+to_goal_direction(X,_,w) :- X < 0.
+to_goal_direction(X,_,e) :- X > 0.
+to_goal_direction(_,Y,n) :- Y < 0.
+to_goal_direction(_,Y,s) :- Y > 0.
+to_goal_direction(_,_,null).
