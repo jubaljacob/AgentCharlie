@@ -16,11 +16,11 @@
 +!rotate_action_free(Task, X, Y, Type) :
     check_direction(-X, -Y, E_Dir) &
     block(B_Dir, Type) & 
-    not (R_Dir == B_Dir) <-
+    (R_Dir == B_Dir) <-
 
     !submit_task(Task, B_Dir, Type).
 
-// If failed, rotation is blocked, therefore execute rotate action blocked goal
+// If failed, rotation is blocked, therefore execute rotate action obstacle goal
 -!rotate_action_free(Task, X, Y, Type) <- !rotate_action_obstacle(Task, X, Y, Type).
 
 // Attempt to rotate opposite direction if normal rotate fails, then fallback to normal rotate
@@ -41,9 +41,8 @@
     block(B_Dir, Type) <-
 
     detach(B_Dir);
-    -block(B_Dir, Type)
-    -state(_);
-    +state(explore_state).
+    -block(B_Dir, Type);
+    +state(navigation).
 
 // Prioritized intention to update beliefs of block & free direction
 @change_block_dir[atomic]

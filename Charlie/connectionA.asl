@@ -1,4 +1,7 @@
 
+agent_pos(0, 0).
+
+
 /* Initial Goal */
 !start.
 

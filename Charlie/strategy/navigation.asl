@@ -1,21 +1,36 @@
+// If agent is not in goal state, agent will retrieve a new free task
+@navigation_new_task
++!navigation: 
+	agent_pos(X_self, Y_self) &
+	not(state(goal_state)) & 
+	location(goal, _, _, _) & 
+	free_task(Name, Deadline, R, X, Y, Type) & 
+	block(Dir, Type) & 
+	not task_already_taken(Name) <-
 
-+!navigation: not(state(goal_state)) & location(goal,_,XG,YG) & agent_pos(X0,Y0) & available_job(Name, Deadline, Rew,X,Y,Type) & block(Dir,Type) & not task_already_taken(Name)<-
 	.broadcast(tell,task_already_taken(Name));
-	-available_job(Name, Deadline, Rew,X,Y,Type);
-	+current_job(Name, Deadline, Rew,X,Y,Type);
-	-+state(goal_state);
-	.print(" Agent start task ",Name).
+	-free_task(Name, Deadline, R, X, Y, Type);
+	+active_task(Name, Deadline, R, X, Y, Type);
+	-+state(goal_state).
 
+// Agent continues to move towards the same direction considering that if the previous move was success
+@navigation_success
++!navigation: 
+	agent_pos(X_self, Y_self) & 
+	lastAction(move) & 
+	lastActionResult(success) & 
+	lastActionParams([Dir]) & 
+	check_direction(_, _, Dir) <-
 
-+!navigation: agent_pos(X0,Y0)  & lastAction(move) & lastActionResult(success) & lastActionParams([Dir]) & check_direction(X1,Y1,Dir)<-
-	.time(H,M,S,MS); 	
-	.print("Agent (",X0,",",Y0,") move ",Dir);
-	-+agent_pos(X0+X1,Y0+Y1);
-	move(Dir).
+	!move(Dir).
 
-+!navigation : .random(RandomNumber) & random_dir([n,s,e,w] ,RandomNumber,Dir) & agent_pos(X0,Y0) & check_direction(X1,Y1,Dir)<-
-    -+agent_pos(X0+X1,Y0+Y1);
-	move(Dir);
-	.time(H,M,S,MS); 	
-	.print("Agent (",X0,",",Y0,") move randomly ",Dir).
+// Agent makes a random navigation movement
+@navigation_random
++!navigation : 
+	agent_pos(X_self, Y_self) &
+	.random(RandomNumber) & 
+	random_dir([n,s,e,w], RandomNumber, Dir) & 
+	check_direction(X, Y, Dir) <-
+	
+	!move(Dir).
 
