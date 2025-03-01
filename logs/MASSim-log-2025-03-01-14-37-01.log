@@ -1,0 +1,752 @@
+[ NORMAL  ]  ##   Starting tournament in 8 seconds.
+[ NORMAL  ]  ##   got authentication: username=A2 password=1 address=127.0.0.1
+[ NORMAL  ]  ##   got authentication: username=A4 password=1 address=127.0.0.1
+[ NORMAL  ]  ##   got authentication: username=A5 password=1 address=127.0.0.1
+[ NORMAL  ]  ##   got authentication: username=A3 password=1 address=127.0.0.1
+[ NORMAL  ]  ##   got authentication: username=A1 password=1 address=127.0.0.1
+[ NORMAL  ]  ##   Configuring random seed: 1740839830113
+[ NORMAL  ]  ##   config.randomFail: 0
+[ NORMAL  ]  ##   config.attachLimit: 10
+[ NORMAL  ]  ##   config.clearSteps: 3
+[ NORMAL  ]  ##   config.clearEnergyCost: 30
+[ NORMAL  ]  ##   config.disableDuration: 4
+[ NORMAL  ]  ##   config.maxEnergy: 300
+[ NORMAL  ]  ##   config.blockTypes: [2,2] -> 2
+[ NORMAL  ]  ##   config.dispensersBounds: [9,9]
+[ NORMAL  ]  ##   config.tasks.duration: [100,200]
+[ NORMAL  ]  ##   config.tasks.size: [1,2]
+[ NORMAL  ]  ##   config.tasks.probability: 0.5
+[ NORMAL  ]  ##   config.events.chance: 0
+[ NORMAL  ]  ##   config.events.radius: 3 - 5
+[ NORMAL  ]  ##   config.events.warning: 5
+[ NORMAL  ]  ##   config.events.create: -3 - 1
+[ NORMAL  ]  ##   config.events.perimeter: 2
+[ NORMAL  ]  ##   Created dispenser(28,0,b0)
+[ NORMAL  ]  ##   Created dispenser(5,31,b0)
+[ NORMAL  ]  ##   Created dispenser(20,2,b0)
+[ NORMAL  ]  ##   Created dispenser(2,27,b0)
+[ NORMAL  ]  ##   Created dispenser(19,10,b0)
+[ NORMAL  ]  ##   Created dispenser(6,9,b0)
+[ NORMAL  ]  ##   Created dispenser(28,31,b0)
+[ NORMAL  ]  ##   Created dispenser(2,10,b0)
+[ NORMAL  ]  ##   Created dispenser(15,22,b0)
+[ NORMAL  ]  ##   Created dispenser(18,14,b1)
+[ NORMAL  ]  ##   Created dispenser(29,27,b1)
+[ NORMAL  ]  ##   Created dispenser(11,15,b1)
+[ NORMAL  ]  ##   Created dispenser(3,21,b1)
+[ NORMAL  ]  ##   Created dispenser(15,29,b1)
+[ NORMAL  ]  ##   Created dispenser(24,20,b1)
+[ NORMAL  ]  ##   Created dispenser(3,20,b1)
+[ NORMAL  ]  ##   Created dispenser(13,26,b1)
+[ NORMAL  ]  ##   Created dispenser(29,1,b1)
+[ NORMAL  ]  ##   Running setup actions
+[ NORMAL  ]  ##   Simulation at step 0
+[ NORMAL  ]  ##   Simulation at step 1
+[ NORMAL  ]  ##   Simulation at step 2
+[ NORMAL  ]  ##   Simulation at step 3
+[ NORMAL  ]  ##   Simulation at step 4
+[ NORMAL  ]  ##   Simulation at step 5
+[ NORMAL  ]  ##   Simulation at step 6
+[ NORMAL  ]  ##   Simulation at step 7
+[ NORMAL  ]  ##   Simulation at step 8
+[ NORMAL  ]  ##   Simulation at step 9
+[ NORMAL  ]  ##   Simulation at step 10
+[ NORMAL  ]  ##   Simulation at step 11
+[ NORMAL  ]  ##   Simulation at step 12
+[ NORMAL  ]  ##   Simulation at step 13
+[ NORMAL  ]  ##   Simulation at step 14
+[ NORMAL  ]  ##   Simulation at step 15
+[ NORMAL  ]  ##   Simulation at step 16
+[ NORMAL  ]  ##   Simulation at step 17
+[ NORMAL  ]  ##   Simulation at step 18
+[ NORMAL  ]  ##   Simulation at step 19
+[ NORMAL  ]  ##   Simulation at step 20
+[ NORMAL  ]  ##   Simulation at step 21
+[ NORMAL  ]  ##   Simulation at step 22
+[ NORMAL  ]  ##   Simulation at step 23
+[ NORMAL  ]  ##   Simulation at step 24
+[ NORMAL  ]  ##   Simulation at step 25
+[ NORMAL  ]  ##   Simulation at step 26
+[ NORMAL  ]  ##   Simulation at step 27
+[ NORMAL  ]  ##   Simulation at step 28
+[ NORMAL  ]  ##   Simulation at step 29
+[ NORMAL  ]  ##   Simulation at step 30
+[ NORMAL  ]  ##   Simulation at step 31
+[ NORMAL  ]  ##   Simulation at step 32
+[ NORMAL  ]  ##   Simulation at step 33
+[ NORMAL  ]  ##   Simulation at step 34
+[ NORMAL  ]  ##   Simulation at step 35
+[ NORMAL  ]  ##   Simulation at step 36
+[ NORMAL  ]  ##   Simulation at step 37
+[ NORMAL  ]  ##   Simulation at step 38
+[ NORMAL  ]  ##   Simulation at step 39
+[ NORMAL  ]  ##   Simulation at step 40
+[ NORMAL  ]  ##   Simulation at step 41
+[ NORMAL  ]  ##   Simulation at step 42
+[ NORMAL  ]  ##   Simulation at step 43
+[ NORMAL  ]  ##   Simulation at step 44
+[ NORMAL  ]  ##   Simulation at step 45
+[ NORMAL  ]  ##   Simulation at step 46
+[ NORMAL  ]  ##   Simulation at step 47
+[ NORMAL  ]  ##   Simulation at step 48
+[ NORMAL  ]  ##   Simulation at step 49
+[ NORMAL  ]  ##   Simulation at step 50
+[ NORMAL  ]  ##   Simulation at step 51
+[ NORMAL  ]  ##   Simulation at step 52
+[ NORMAL  ]  ##   Simulation at step 53
+[ NORMAL  ]  ##   Simulation at step 54
+[ NORMAL  ]  ##   Simulation at step 55
+[ NORMAL  ]  ##   Simulation at step 56
+[ NORMAL  ]  ##   Simulation at step 57
+[ NORMAL  ]  ##   Simulation at step 58
+[ NORMAL  ]  ##   Simulation at step 59
+[ NORMAL  ]  ##   Simulation at step 60
+[ NORMAL  ]  ##   Simulation at step 61
+[ NORMAL  ]  ##   Simulation at step 62
+[ NORMAL  ]  ##   Simulation at step 63
+[ NORMAL  ]  ##   Simulation at step 64
+[ NORMAL  ]  ##   Simulation at step 65
+[ NORMAL  ]  ##   Simulation at step 66
+[ NORMAL  ]  ##   Simulation at step 67
+[ NORMAL  ]  ##   Simulation at step 68
+[ NORMAL  ]  ##   Simulation at step 69
+[ NORMAL  ]  ##   Simulation at step 70
+[ NORMAL  ]  ##   Simulation at step 71
+[ NORMAL  ]  ##   Simulation at step 72
+[ NORMAL  ]  ##   Simulation at step 73
+[ NORMAL  ]  ##   Simulation at step 74
+[ NORMAL  ]  ##   Simulation at step 75
+[ NORMAL  ]  ##   Simulation at step 76
+[ NORMAL  ]  ##   Simulation at step 77
+[ NORMAL  ]  ##   Simulation at step 78
+[ NORMAL  ]  ##   Simulation at step 79
+[ NORMAL  ]  ##   Simulation at step 80
+[ NORMAL  ]  ##   Simulation at step 81
+[ NORMAL  ]  ##   Simulation at step 82
+[ NORMAL  ]  ##   Simulation at step 83
+[ NORMAL  ]  ##   Simulation at step 84
+[ NORMAL  ]  ##   Simulation at step 85
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   Simulation at step 86
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 87
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   Simulation at step 88
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   Simulation at step 89
+[ NORMAL  ]  ##   Simulation at step 90
+[ NORMAL  ]  ##   Simulation at step 91
+[ NORMAL  ]  ##   Simulation at step 92
+[ NORMAL  ]  ##   Simulation at step 93
+[ NORMAL  ]  ##   Simulation at step 94
+[ NORMAL  ]  ##   Simulation at step 95
+[ NORMAL  ]  ##   Simulation at step 96
+[ NORMAL  ]  ##   Simulation at step 97
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 98
+[ NORMAL  ]  ##   Simulation at step 99
+[ NORMAL  ]  ##   Simulation at step 100
+[ NORMAL  ]  ##   Simulation at step 101
+[ NORMAL  ]  ##   Simulation at step 102
+[ NORMAL  ]  ##   Simulation at step 103
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   Simulation at step 104
+[ NORMAL  ]  ##   Simulation at step 105
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   Simulation at step 106
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 107
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   Simulation at step 108
+[ NORMAL  ]  ##   Simulation at step 109
+[ NORMAL  ]  ##   Simulation at step 110
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   Simulation at step 111
+[ NORMAL  ]  ##   Simulation at step 112
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 113
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   Simulation at step 114
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   Simulation at step 115
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   Simulation at step 116
+[ NORMAL  ]  ##   Simulation at step 117
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   Simulation at step 118
+[ NORMAL  ]  ##   Simulation at step 119
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 120
+[ NORMAL  ]  ##   Simulation at step 121
+[ NORMAL  ]  ##   Simulation at step 122
+[ NORMAL  ]  ##   Simulation at step 123
+[ NORMAL  ]  ##   Simulation at step 124
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   Simulation at step 125
+[ NORMAL  ]  ##   Simulation at step 126
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 127
+[ NORMAL  ]  ##   Simulation at step 128
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   Simulation at step 129
+[ NORMAL  ]  ##   Simulation at step 130
+[ NORMAL  ]  ##   Simulation at step 131
+[ NORMAL  ]  ##   Simulation at step 132
+[ NORMAL  ]  ##   Simulation at step 133
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 134
+[ NORMAL  ]  ##   Simulation at step 135
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   Simulation at step 136
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   Simulation at step 137
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 138
+[ NORMAL  ]  ##   Simulation at step 139
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   Simulation at step 140
+[ NORMAL  ]  ##   Simulation at step 141
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 142
+[ NORMAL  ]  ##   Simulation at step 143
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   Simulation at step 144
+[ NORMAL  ]  ##   Simulation at step 145
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   Simulation at step 146
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   Simulation at step 147
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   Simulation at step 148
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   Simulation at step 149
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   Simulation at step 150
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   Simulation at step 151
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   Simulation at step 152
+[ NORMAL  ]  ##   Simulation at step 153
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   Simulation at step 154
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 155
+[ NORMAL  ]  ##   Simulation at step 156
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 157
+[ NORMAL  ]  ##   Simulation at step 158
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   Simulation at step 159
+[ NORMAL  ]  ##   Simulation at step 160
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   Simulation at step 161
+[ NORMAL  ]  ##   Simulation at step 162
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   Simulation at step 163
+[ NORMAL  ]  ##   Simulation at step 164
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   Simulation at step 165
+[ NORMAL  ]  ##   Simulation at step 166
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   Simulation at step 167
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   Simulation at step 168
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 169
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   Simulation at step 170
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 171
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   Simulation at step 172
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 173
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   Simulation at step 174
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   Simulation at step 175
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   Simulation at step 176
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 177
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 178
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 179
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   Simulation at step 180
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   Simulation at step 181
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 182
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   Simulation at step 183
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   Simulation at step 184
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   Simulation at step 185
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 186
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   Simulation at step 187
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   Simulation at step 188
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   Simulation at step 189
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   Simulation at step 190
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   Simulation at step 191
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   Simulation at step 192
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   Simulation at step 193
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   Simulation at step 194
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   Simulation at step 195
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 196
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   Simulation at step 197
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   Simulation at step 198
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 199
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   Simulation at step 200
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   Simulation at step 201
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   Simulation at step 202
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   Simulation at step 203
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   Simulation at step 204
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   Simulation at step 205
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   Simulation at step 206
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 207
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 208
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   Simulation at step 209
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 210
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   Simulation at step 211
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 212
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   Simulation at step 213
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   Simulation at step 214
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   Simulation at step 215
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   Simulation at step 216
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   Simulation at step 217
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   Simulation at step 218
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   Simulation at step 219
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 220
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   Simulation at step 221
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   Simulation at step 222
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   Simulation at step 223
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   Simulation at step 224
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   Simulation at step 225
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   Simulation at step 226
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   Simulation at step 227
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   Simulation at step 228
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   Simulation at step 229
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   Simulation at step 230
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 231
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   Simulation at step 232
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   Simulation at step 233
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   Simulation at step 234
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   Simulation at step 235
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 236
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   Simulation at step 237
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 238
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   Simulation at step 239
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   Simulation at step 240
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   Simulation at step 241
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 242
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 243
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   Simulation at step 244
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   Simulation at step 245
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   Simulation at step 246
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   Simulation at step 247
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   Simulation at step 248
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   Simulation at step 249
+[ NORMAL  ]  ##   No valid action available in time for agent A5.
+[ NORMAL  ]  ##   No valid action available in time for agent A2.
+[ NORMAL  ]  ##   No valid action available in time for agent A3.
+[ NORMAL  ]  ##   No valid action available in time for agent A1.
+[ NORMAL  ]  ##   No valid action available in time for agent A4.
+[ NORMAL  ]  ##   All simulations run - server ending now.
+[ ERROR  ]  ##   Error receiving json object. Stop receiving.
+[ ERROR  ]  ##   Error receiving json object. Stop receiving.
+[ ERROR  ]  ##   Error receiving json object. Stop receiving.
+[ ERROR  ]  ##   Error receiving json object. Stop receiving.
+[ ERROR  ]  ##   Error receiving json object. Stop receiving.
