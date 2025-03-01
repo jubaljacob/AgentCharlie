@@ -12,7 +12,7 @@
     !rotate_action_free(Task, X, Y, Type).
 
 // If block is at desired direction, stop rotating and submit the task
-@rotate_action_free
+@rotate_action_free_submit
 +!rotate_action_free(Task, X, Y, Type) :
     check_direction(-X, -Y, E_Dir) &
     block(B_Dir, Type) & 

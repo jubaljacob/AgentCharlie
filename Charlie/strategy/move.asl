@@ -34,7 +34,7 @@
     !navigation.
 
 // When agent is adjacent to dispenser, initiate request
-@move_to_dispenser
+@move_to_dispenser_request
 +!move_to_dispenser(X, Y, Type) : 
     agent_pos(X_self, Y_self) & 
     to_dispenser_direction((X-X_self), (Y-Y_self), null) <- 

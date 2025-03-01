@@ -13,4 +13,4 @@
     detach(B_Dir);
     -block(B_Dir, Type);
     +free_direction(B_Dir);
-    +state(navigation)..
+    +state(navigation).
