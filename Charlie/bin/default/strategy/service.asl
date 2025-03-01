@@ -22,7 +22,7 @@ to_dispenser_direction(0, 0, e).
 // Condition 1: When agent is at the corner, move to adjacent position X = 1/-1
 // Condition 2: Agent always move X position to location, then move Y
 to_dispenser_direction(X, _, e):- X >= 1.
-to_dispenser_direction(X, _, w):- X =< -1.
+to_dispenser_direction(X, _, w):- X <= -1.
 to_dispenser_direction(_, Y, s):- Y > 1.
 to_dispenser_direction(_, Y, n):- Y < -1.
 
@@ -54,3 +54,6 @@ to_goal_direction(X,_,e) :- X > 0.
 to_goal_direction(_,Y,n) :- Y < 0.
 to_goal_direction(_,Y,s) :- Y > 0.
 to_goal_direction(_,_,null).
+
+dirch_step_calc(CStep,PStep) :- ((CStep - PStep ) mod 5) == 0.
+random_dir(DirList,RandomNumber,Dir) :- (RandomNumber <= 0.25 & .nth(0,DirList,Dir)) | (RandomNumber <= 0.5 & .nth(1,DirList,Dir)) | (RandomNumber <= 0.75 & .nth(2,DirList,Dir)) | (.nth(3,DirList,Dir)).
