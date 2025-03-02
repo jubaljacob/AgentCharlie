@@ -12,7 +12,7 @@
 
 	!move(R_Dir);
 	-+dirch_step(CStep, New_r);
-	if (CStep == 30) { -+state(find_task); }.
+	if (CStep == 30) { !explore_done_or_not; }.
 
 // If agent found dispenser for block b0 and b1 and a goal, agent will stop exploring
 @explore_early_stop_all
@@ -46,3 +46,13 @@
 
 	!move(Dir).
 
+@explore_is_done
++!explore_done_or_not : 
+	state(explore) & 
+	location(dispenser, _, _, _) &
+	location(goal, _, _, _) <- 
+
+	-+state(find_task).
+
+@explore_is_not_done
+-!explore_done_or_not : true.
