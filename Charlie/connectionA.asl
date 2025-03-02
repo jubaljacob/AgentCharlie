@@ -43,11 +43,12 @@ step_count(0).
 +actionID(ID) : 
     agent_pos(X_self, Y_self) &
     state(State) & State == find_blocks & 
+    not(targeted_dispenser(_, _, _)) &
     active_task(Name, _, _, _, _, Type) <- 
 
     !find_optimal_plan(X_self, Y_self, Type, plan(X_d, Y_d, X_g, Y_g, _));
     .print("An op plan is found for task ", Name);
-    +targeted_dispenser(X_d, Y_d);
+    +targeted_dispenser(X_d, Y_d, Type);
     +targeted_goal(X_g, Y_g);
     !move_to_dispenser(X_d, Y_d, Type).
 

@@ -36,7 +36,7 @@
     agent_pos(X_self, Y_self) & 
     to_dispenser_direction((X-X_self), (Y-Y_self), null) <- 
     
-    -targeted_dispenser(X, Y);
+    -targeted_dispenser(X, Y, Type);
 	!request_from_dispenser(X, Y, Type).
 
 // If move to dispenser fails
