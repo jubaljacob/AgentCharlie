@@ -75,7 +75,7 @@ step_count(0).
 // Percept and add goal to local beliefs if never been before
 @percept_goal
 +goal(X, Y) : 
-    agent_pos(X_self, Y_self)
+    agent_pos(X_self, Y_self) &
     not(location(goal,_,(X_self+X),(Y_self+Y))) <-
     
 	+location(goal,null,(X_self+X),(Y_self+Y)).

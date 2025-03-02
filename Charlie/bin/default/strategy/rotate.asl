@@ -1,7 +1,8 @@
 // To rotate the block to goal (opposite direction) when agent is submitting the task
 // B_Dir: Block direction / E_Dir: Expected direction / R_Action: Next Executable direction (cw, ccw)
 @rotate_action_free
-+!rotate_action_free(Task, X, Y, Type) :
++!rotate_action_free(Task, X, Y, Type) : 
+    // check_direction(-X, -Y, E_Dir) &
     check_direction(-X, -Y, E_Dir) &
     block(B_Dir, Type) & 
     not (R_Dir == B_Dir) &
@@ -13,7 +14,7 @@
 
 // If block is at desired direction, stop rotating and submit the task
 @rotate_action_free_submit
-+!rotate_action_free(Task, X, Y, Type) :
++!rotate_action_free(Task, X, Y, Type) : 
     check_direction(-X, -Y, E_Dir) &
     block(B_Dir, Type) & 
     (R_Dir == B_Dir) <-
@@ -25,7 +26,7 @@
 
 // Attempt to rotate opposite direction if normal rotate fails, then fallback to normal rotate
 @rotate_action_obstacle
-+!rotate_action_obstacle(Task, X, Y, Type) :
++!rotate_action_obstacle(Task, X, Y, Type) : 
     check_direction(-X, -Y, E_Dir) &
     block(B_Dir, Type) & 
     not (R_Dir == B_Dir) &
@@ -36,13 +37,11 @@
     !update_block_rotation(R_Action);
     !rotate_action_free(Task, X, Y, Type).
 
-// If fails the failure of a normal rotate action, deem rotation is not possible, detach block and run away
+// If fails the failure of a normal rotate action, deem rotation is not possible, detach block and run away, remove task from active
 -!rotate_action_obstacle(Task, X, Y, Type) : 
     block(B_Dir, Type) <-
 
-    detach(B_Dir);
-    -block(B_Dir, Type);
-    +state(explore).
+    !task_submit_failure(Task, B_Dir, Type).
 
 // Prioritized intention to update beliefs of block & free direction
 @change_block_dir[atomic]
@@ -75,7 +74,7 @@
 
 // Update for 3 blocks
 @update_block_rotation3[atomic]
-+!update_block_rotation(R_Action) :
++!update_block_rotation(R_Action) : 
     block(Dir1, B1) & 
     block(Dir2, B2) & 
     block(Dir3, B3) & 
