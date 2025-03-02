@@ -37,9 +37,8 @@ step_count(0).
 // Find block state
 +actionID(ID) : state(State) & State == find_blocks &
     targeted_dispenser(X_d, Y_d, Type) <- 
-    // .print("Agent is in state ",State);
+    
     !move_to_dispenser(X_d, Y_d, Type).
-	// !explore.
 
 // If in find block state, but no targeted_dispenser, attempt look for dispenser
 +actionID(ID) : 
@@ -69,6 +68,13 @@ step_count(0).
     +targeted_goal(X_g, Y_g);
     !move_to_goal(X_g, Y_g).
 
+// When agent is in power saving mode, agent continue explore world, but very slowly
++actionID(ID) : state(State) &
+    State == power_saving <-
+
+    .wait(150);
+    !explore.
+
 // Percept and add dispenser to local beliefs if never been before
 @percept_dispenser
 +thing(X, Y, dispenser, Type) : 
@@ -84,6 +90,16 @@ step_count(0).
     not(location(goal,_,(X_self+X),(Y_self+Y))) <-
     
 	+location(goal,null,(X_self+X),(Y_self+Y)).
+
+// When agent receive a single block task assignment from server and agent in power saving mode with applicable task, immediately accept task
+@reveive_task_assignment_power_saving[atomic]
++task(Name, Deadline, R, Params) : 
+    state(power_saving) & 
+    (.length(Params) == 1) & 
+    .member(req(X, Y, Type), Params) <-
+    
+    +free_task(Name, Deadline, R, X, Y, Type); 
+    !take_task(Name, Deadline, R, X, Y, Type).
 
 // When agent receive a single block task assignment from server
 @reveive_task_assignment_single_block

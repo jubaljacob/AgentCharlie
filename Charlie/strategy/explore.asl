@@ -31,7 +31,7 @@
 // different to the previous rotation( cw/ccw) and the agent will move in that direction.
 @explore_pattern
 +!explore : 
-	state(explore) & 
+	(state(explore) | state(power_saving)) & 
 	dirch_step(PStep, Old_r) & 
 	step_count(CStep) & 
 	dirch_step_calc(CStep, PStep) & 
@@ -57,7 +57,8 @@
 @explore_success
 +!explore : 
 	agent_pos(X_self, Y_self) & 
-	state(explore) & lastAction(move) & 
+	(state(explore) | state(power_saving)) & 
+	lastAction(move) & 
 	lastActionParams([Dir]) & 
 	lastActionResult(success) <- 
 

@@ -31,11 +31,14 @@
     !take_task(Name, Deadline, R, X, Y, b1).
 
 // If look for task failed, agent waits for 1.5s and look for task again. Agent perform random action to prevent from dying
+// When agent cant look for available task, agent goes into power saving state
 @look_for_task_failed
 -!look_for_task <- 
-    .wait(150); 
-    !explore;
-    !look_for_task.
+
+    -+state(power_saving).
+    // .wait(150); 
+    // !explore;
+    // !look_for_task.
 
 // Take task and broadcast to all agents to notify them that task is no longer applicable, if agent has block, dont need go dispenser
 @take_task_submit_with_block
