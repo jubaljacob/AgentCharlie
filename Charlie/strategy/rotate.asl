@@ -1,3 +1,12 @@
+@rotate_action
++!rotate_action_free(Task, X, Y, Type) : 
+    // check_direction(-X, -Y, E_Dir) &
+    check_direction(-X, -Y, E_Dir) &
+    block(B_Dir, Type) & 
+    not (R_Dir == B_Dir) <-
+
+    .print(E_Dir, B_Dir).
+
 // To rotate the block to goal (opposite direction) when agent is submitting the task
 // B_Dir: Block direction / E_Dir: Expected direction / R_Action: Next Executable direction (cw, ccw)
 @rotate_action_free

@@ -5,7 +5,7 @@
     (.length(Dirs) > 1) &
     not (active_task(_, _, _, _, _, _)) & 
     free_task(Name, Deadline, R, X, Y, Type) & 
-    location(dispenser, Type_, _, _) <- 
+    location(dispenser, Type, _, _) <- 
 
     !take_task(Name, Deadline, R, X, Y, Type).
 
@@ -18,7 +18,7 @@
     block(B_Dir, b0) &
     free_task(Name, Deadline, R, X, Y, b0) <- 
 
-    !take_task(Name, Deadline, R, X, Y, b0).
+    !take_task_block(Name, Deadline, R, X, Y, b0).
 
 @look_for_task_has_block_b1
 +!look_for_task : 
@@ -28,7 +28,7 @@
     block(B_Dir, b1) &
     free_task(Name, Deadline, R, X, Y, b1) <- 
 
-    !take_task(Name, Deadline, R, X, Y, b1).
+    !take_task_block(Name, Deadline, R, X, Y, b1).
 
 // If look for task failed, agent waits for 1.5s and look for task again. Agent perform random action to prevent from dying
 // When agent cant look for available task, agent goes into power saving state
@@ -42,7 +42,7 @@
 
 // Take task and broadcast to all agents to notify them that task is no longer applicable, if agent has block, dont need go dispenser
 @take_task_submit_with_block
-+!take_task(Name, Deadline, R, X, Y, Type) : 
++!take_task_block(Name, Deadline, R, X, Y, Type) : 
     free_task(Name, _, _, _ , _, _) &
     block(B_Dir, Type) <-
 
@@ -51,15 +51,20 @@
     -free_task(Name, _, _, _ , _, _);
     +active_task(Name, Deadline, R, X, Y, Type).
 
-// Take task and broadcast to all agents to notify them that task is no longer applicable
+// Take task and broadcast to all agents to notify them that task is no longer applicable, if task taken by other agents, wait
 @take_task
-+!take_task(Name, Deadline, R, X, Y, Type) : 
-    free_task(Name, _, _, _ , _, _) <-
++!take_task(Name, Deadline, R, X, Y, Type) <-
 
-    .broadcast(tell, task_assigned(Name));
-    -+state(find_blocks);
-    -free_task(Name, _, _, _ , _, _);
-    +active_task(Name, Deadline, R, X, Y, Type).
+    !find_optimal_plan(X_self, Y_self, Type, plan(X_d, Y_d, X_g, Y_g, _));
+    if( free_task(Name, _, _, _ , _, _) ) {
+        .broadcast(tell, task_assigned(Name));
+        .print("An op plan is found for task ", Name, " Dispenser ", X_d, " Goal ", X_g);
+        +targeted_dispenser(X_d, Y_d, Type);
+        +targeted_goal(X_g, Y_g);
+        -+state(find_blocks);
+        -free_task(Name, _, _, _ , _, _);
+        +active_task(Name, Deadline, R, X, Y, Type)
+    }.
 
 // If submit task was success, change state belief to explore state, tell other agents task succeed
 @submit_task

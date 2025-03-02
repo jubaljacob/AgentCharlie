@@ -43,7 +43,7 @@ rotating_dir(F_Dir, T_Dir, ccw) :- direction(F_Dir, F_Idx) & direction(T_Dir, F_
 
 
 // Wrapper of rotation for agent rotating for goal submission > 90 degrees
-goal_rotation(X, Y, Dir) :- rotation(X, Y, Dir) & not (Dir == null).
+goal_rotation(X, Y, Dir) :- rotation(X, Y, Dir) & not(Dir == null).
 goal_rotation(_, _, Dir) :- Dir = ccw.
 
 // Rotate the opposite direction when obstacle meets at original rotation direction
