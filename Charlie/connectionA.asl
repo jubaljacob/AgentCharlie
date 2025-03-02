@@ -20,6 +20,11 @@ step_count(0).
 //  Plans 
 
 +!start : true <-
+    -block(_);
+    -location(_,_,_,_);
+    -targeted_dispenser(_,_,_);
+    -targeted_goal(_,_);
+    -active_task(_,_,_,_,_,_);
 	.print("Hello massim world.").
     
 +step(S) : lastAction(move) & step_count(Count) <-
@@ -31,6 +36,7 @@ step_count(0).
 
 // Find task state
 +actionID(ID) : state(State) & State == find_task <- 
+
 	!look_for_task.
 
 // Find block state
@@ -40,17 +46,17 @@ step_count(0).
     !move_to_dispenser(X_d, Y_d, Type).
 
 // If in find block state, but no targeted_dispenser, attempt look for dispenser
-+actionID(ID) : 
-    agent_pos(X_self, Y_self) &
-    state(State) & State == find_blocks & 
-    not(targeted_dispenser(_, _, _)) &
-    active_task(Name, _, _, _, _, Type) <- 
+// +actionID(ID) : 
+//     agent_pos(X_self, Y_self) &
+//     state(State) & State == find_blocks & 
+//     not(targeted_dispenser(_, _, _)) &
+//     active_task(Name, _, _, _, _, Type) <- 
 
-    !find_optimal_plan(X_self, Y_self, Type, plan(X_d, Y_d, X_g, Y_g, _));
-    .print("An op plan is found for task ", Name);
-    +targeted_dispenser(X_d, Y_d, Type);
-    +targeted_goal(X_g, Y_g);
-    !move_to_dispenser(X_d, Y_d, Type).
+//     !find_optimal_plan(X_self, Y_self, Type, plan(X_d, Y_d, X_g, Y_g, _));
+//     .print("An op plan is found for task ", Name, " Dispenser ", X_d, " Goal ", X_g);
+//     +targeted_dispenser(X_d, Y_d, Type);
+//     +targeted_goal(X_g, Y_g);
+//     !move_to_dispenser(X_d, Y_d, Type).
 
 // Find goal state
 +actionID(ID) : state(State) & 
@@ -60,31 +66,32 @@ step_count(0).
     !move_to_goal(X_g, Y_g).
 
 // If in find goal state, but no targeted goal, attempt look for nearest goal and submit
-+actionID(ID) : state(State) & 
-    State == goal_state &
-     not(targeted_goal(X_g, Y_g))  <-
+// +actionID(ID) : state(State) & 
+//     State == goal_state &
+//      not(targeted_goal(X_g, Y_g))  <-
 
-    !find_nearest_goal(X_self, Y_self, X_g, Y_g);
-    +targeted_goal(X_g, Y_g);
-    !move_to_goal(X_g, Y_g).
+//     !find_nearest_goal(X_self, Y_self, X_g, Y_g);
+//     +targeted_goal(X_g, Y_g);
+//     !move_to_goal(X_g, Y_g).
 
 // When agent is in power saving mode, agent continue explore world, but very slowly
 +actionID(ID) : state(State) &
     State == power_saving <-
 
-    .wait(150);
+    // .wait(150);
     !explore.
 
 // Percept and add dispenser to local beliefs if never been before
-@percept_dispenser
-+thing(X, Y, dispenser, Type) : 
+@percept_dispenser[atomic]
++thing(X, Y, Detail, Type) : 
     agent_pos(X_self, Y_self) &
-    not(location(dispenser, Type, (X_self+X), (Y_self+Y))) <-
+    Detail = dispenser &
+    not(location(Detail, Type, (X_self+X), (Y_self+Y))) <-
     
-	+location(dispenser,Type,(X_self+X),(Y_self+Y)).
+	+location(Detail,Type,(X_self+X),(Y_self+Y)).
 
 // Percept and add goal to local beliefs if never been before
-@percept_goal
+@percept_goal[atomic]
 +goal(X, Y) : 
     agent_pos(X_self, Y_self) &
     not(location(goal,_,(X_self+X),(Y_self+Y))) <-

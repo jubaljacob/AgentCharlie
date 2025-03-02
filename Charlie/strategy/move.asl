@@ -1,5 +1,5 @@
 // Move action that tends to be prioritized so agent always consider to move first
-@move[atomic]
+@move
 +!move(Dir) : 
     agent_pos(X_self, Y_self) & 
     check_direction(X, Y, Dir) <- 
@@ -7,7 +7,7 @@
     move(Dir);
     -+agent_pos((X_self+X), (Y_self+Y)).
 
-// Move to goal when provided with agent's position detects for possible direction to move, if at goal, remove targeted_goal belief
+// Move to goal when provided with agent's position detects for possible direction to move
 @move_to_goal
 +!move_to_goal(X, Y): 
     agent_pos(X_self, Y_self) & 
@@ -30,13 +30,13 @@
     
 	!move(Dir).
 
-// When agent is adjacent to dispenser, remove dispenser target, initiate request block
-@move_to_dispenser_request
+// When agent is adjacent to dispenser, initiate request block
+@move_to_dispenser_request[atomic]
 +!move_to_dispenser(X, Y, Type) : 
     agent_pos(X_self, Y_self) & 
     to_dispenser_direction((X-X_self), (Y-Y_self), null) <- 
     
-    -targeted_dispenser(X, Y, Type);
+    // -targeted_dispenser(X, Y, Type).
 	!request_from_dispenser(X, Y, Type).
 
 // If move to dispenser fails
@@ -69,7 +69,7 @@
     thing((X-X_self), (Y-Y_self), block, Type) & 
     free_direction(Dir) <-
 
-    !attach_to_block(Dir, Type).
+    !attach_to_block(X, Y, Dir, Type).
 
 // Request block from dispenser if adjacent direction is free, then add to mapper
 @request_from_dispenser_free
@@ -79,14 +79,15 @@
     not obstacle((X-X_self), (Y-Y_self)) &
     free_direction(Dir) <-
 
-    request(Dir);
-    !attach_to_block(Dir).
+    request(Dir).
+    // .print("Request blockkkk").
+    // !attach_to_block(X, Y, Dir, Type).
 
 // In case if any of the request from dispenser attempt failed, agent waits patiently and request again
 @request_from_dispenser_failed
 -!request_from_dispenser(X, Y, Type) <-
 
-    .wait(100);
+//     .wait(100);
     !request_from_dispenser(X, Y, Type).
 
 // When a block is attached, add to belief that a block is with the agent (direction now not free) and agent changes to goal state.
@@ -94,6 +95,7 @@
 +!attach_to_block(X, Y, Dir, Type) <-
 
     attach(Dir);
+    -targeted_dispenser(X, Y, Type);
     +block(Dir, Type);
     -free_direction(Dir);
     -+state(goal_state).
