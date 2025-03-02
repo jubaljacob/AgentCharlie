@@ -47,11 +47,12 @@
     -free_task(Name, _, _, _ , _, _);
     +active_task(Name, Deadline, R, X, Y, Type).
 
-// If submit task was success, change state belief to explore state
+// If submit task was success, change state belief to explore state, tell other agents task succeed
 @submit_task
-+!submit_task(Task, B_Dir, Type) <-
++!submit_task(Task, B_Dir, Type) : Name(Ag) <-
 
     submit(Task);
+    .broadcast(tell,task_attempt_succeed(Task,Ag));
     -active_task(_,_,_,_,_,_);
     -block(B_Dir, Type);
     +free_direction(B_Dir);
@@ -62,11 +63,11 @@
 -!submit_task(Task, B_Dir, Type) <- 
     !task_submit_failure(Task, B_Dir, Type).
 
-// Actions when task submission attempt fails
-+!task_submit_failure(Task, B_Dir, Type) <-
+// Actions when task submission attempt fails, do not add back to free task, as agent is not able to achieve
++!task_submit_failure(Task, B_Dir, Type) : name(Ag) <-
 
     detach(B_Dir);
-    -active_task(_,_,_,_,_,_);
+    .broadcast(tell,failed_attempt_task(Task, Ag));
+    -active_task(Name,_,_,_,_,_);
     -block(B_Dir, Type);
-    +free_direction(B_Dir);
     -+state(explore).

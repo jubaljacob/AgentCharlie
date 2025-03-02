@@ -48,7 +48,7 @@ step_count(0).
     active_task(Name, _, _, _, _, Type) <- 
 
     !find_optimal_plan(X_self, Y_self, Type, plan(Xd, Yd, Xg, Yg, _));
-    .print("An optimal plan is found for task ", Name);
+    .print("An op plan is found for task ", Name);
     +targeted_dispenser(Xd, Yd);
     +targeted_goal(Xg, Yg);
     !move_to_dispenser(X_d, Y_d, Type).
@@ -75,7 +75,7 @@ step_count(0).
 // Percept and add goal to local beliefs if never been before
 @percept_goal
 +goal(X, Y) : 
-    agent_pos(X_self, Y_self)
+    agent_pos(X_self, Y_self) &
     not(location(goal,_,(X_self+X),(Y_self+Y))) <-
     
 	+location(goal,null,(X_self+X),(Y_self+Y)).
@@ -95,6 +95,22 @@ step_count(0).
     -free_task(Name, _, _, _ , _, _);
     .print("Task ", Name, " is taken by agent ", A).
 
+// Add back failed task by other agents as free task
+@add_failed_task_by_other_agents
++failed_attempt_task(Task, Ag) : 
+    not(free_task(Task, _, _, _ , _, _)) &
+    task(Task, Deadline, R, Params) &
+    (.member(req(X, Y, Type)), Params) <-
+
+    .print(Ag, " has failed task submission, adding task ", Task, "back to free task belief");
+    +free_task(Name, Deadline, R, X, Y, Type).
+
+// When task has been succeed by other agent, drop from task belief, reduce computation memory
+@task_attempt_succeed
++task_attempt_succeed(Task, Ag) <- 
+
+    .print("Pop champagne! Congratulations to ", Ag);
+    -task(Task, _, _, _).
  
 // +actionID(ID) :  state(find_blocks) & target_dispenser(Type,X,Y) <-
 // 	!move_to_dispenser(X,Y,Type).
