@@ -12,12 +12,11 @@
 +!move_to_goal(X, Y): 
     agent_pos(X_self, Y_self) & 
     to_goal_direction((X-X_self), (Y-Y_self), Dir) &
-    check_direction(NewX, NewY, Dir) & 
-    active_task(Name, _, _, X_Task, Y_Task, Type) <-
+    check_direction(NewX, NewY, Dir)  <-
 
     if (Dir == null) { 
         -targeted_goal(X, Y);
-        !rotate_action_free(Name, X_Task, -Y_Task, Type); 
+        -+state(rotate_to_goal);
     }
     else { !move(Dir); }.
 

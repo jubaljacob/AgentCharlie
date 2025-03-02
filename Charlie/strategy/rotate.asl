@@ -1,22 +1,14 @@
-@rotate_action
-+!rotate_action_free(Task, X, Y, Type) : 
-    // check_direction(-X, -Y, E_Dir) &
-    check_direction(-X, -Y, E_Dir) &
-    block(B_Dir, Type) & 
-    not (R_Dir == B_Dir) <-
-
-    .print(E_Dir, B_Dir).
-
 // To rotate the block to goal (opposite direction) when agent is submitting the task
 // B_Dir: Block direction / E_Dir: Expected direction / R_Action: Next Executable direction (cw, ccw)
 @rotate_action_free
 +!rotate_action_free(Task, X, Y, Type) : 
-    // check_direction(-X, -Y, E_Dir) &
     check_direction(-X, -Y, E_Dir) &
     block(B_Dir, Type) & 
-    not (R_Dir == B_Dir) &
-    goal_rotation(E_Dir, B_Dir, R_Action) <-
+    not (E_Dir == B_Dir) &
+    goal_rotation(B_Dir, E_Dir, R_Action) <-
 
+    .print(Task, " - " , X, " - ", Y, E_Dir, " - ", B_Dir, (E_Dir == B_Dir));
+    // .print(E_Dir, B_Dir);
     rotate(R_Action);
     !update_block_rotation(R_Action);
     !rotate_action_free(Task, X, Y, Type).
@@ -26,8 +18,9 @@
 +!rotate_action_free(Task, X, Y, Type) : 
     check_direction(-X, -Y, E_Dir) &
     block(B_Dir, Type) & 
-    (R_Dir == B_Dir) <-
+    (E_Dir == B_Dir) <-
 
+    -+state(submit_task);
     !submit_task(Task, B_Dir, Type).
 
 // If failed, rotation is blocked, therefore execute rotate action obstacle goal
@@ -38,8 +31,8 @@
 +!rotate_action_obstacle(Task, X, Y, Type) : 
     check_direction(-X, -Y, E_Dir) &
     block(B_Dir, Type) & 
-    not (R_Dir == B_Dir) &
-    goal_rotation(E_Dir, B_Dir, R_Action) & 
+    not (E_Dir == B_Dir) &
+    goal_rotation(B_Dir, E_Dir, R_Action) & 
     obstacle_rotation(R_Action, New_R) <-
 
     rotate(New_R);

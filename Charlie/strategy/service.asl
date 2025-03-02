@@ -5,12 +5,19 @@ free_direction(e).
 free_direction(w).
 
 // To check the direction based on X & Y or get X & Y based on direction provided
-check_direction(0, -1, n).
-check_direction(0, 1, s).
-check_direction(1, 0, e).
-check_direction(-1, 0, w).
+// check_direction(0, -1, n).
+// check_direction(0, 1, s).
+// check_direction(1, 0, e).
+// check_direction(-1, 0, w).
+// check_direction(0, 0, null).
+// check_direction(_, _, e).
+
+check_direction(0,-1,n).
+check_direction(0,1,s).
+check_direction(1,0,e).
+check_direction(-1,0,w).
+check_direction(X,Y,e) :- (X > 1 | X < -1) & (Y > 1 | Y < -1).
 check_direction(0, 0, null).
-check_direction(_, _, e).
 
 // When agent is adjacent, no next direction
 to_dispenser_direction(0, 1, null).
@@ -43,7 +50,7 @@ rotating_dir(F_Dir, T_Dir, ccw) :- direction(F_Dir, F_Idx) & direction(T_Dir, F_
 
 
 // Wrapper of rotation for agent rotating for goal submission > 90 degrees
-goal_rotation(X, Y, Dir) :- rotation(X, Y, Dir) & not(Dir == null).
+goal_rotation(X, Y, Dir) :- rotating_dir(X, Y, Dir) & not(Dir == null).
 goal_rotation(_, _, Dir) :- Dir = ccw.
 
 // Rotate the opposite direction when obstacle meets at original rotation direction

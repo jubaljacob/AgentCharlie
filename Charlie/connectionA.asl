@@ -81,6 +81,20 @@ step_count(0).
     // .wait(150);
     !explore.
 
+// Agent rotate to align block to goal
++actionID(ID) : state(State) &
+    State == rotate_to_goal & 
+    active_task(Name, _, _, X_Task, Y_Task, Type) <-
+
+    !rotate_action_free(Name, X_Task, Y_Task, Type).
+
+// Agent submits a goal
+// +actionID(ID) : state(State) &
+//     State == submit_task & 
+//     active_task(Name, _, _, X_Task, Y_Task, Type) <-
+
+//     true; 
+
 // Percept and add dispenser to local beliefs if never been before
 @percept_dispenser[atomic]
 +thing(X, Y, Detail, Type) : 
