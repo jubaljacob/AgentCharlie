@@ -1,32 +1,3 @@
-// If agent is not in goal state, agent will retrieve a new free task
-// @explore_new_task
-// +!explore: 
-// 	agent_pos(X_self, Y_self) &
-// 	not(state(goal_state)) & 
-// 	location(goal, _, _, _) & 
-// 	free_task(Name, Deadline, R, X, Y, Type) & 
-// 	block(Dir, Type) & 
-// 	not task_already_taken(Name) <-
-
-// 	.broadcast(tell,task_already_taken(Name));
-// 	-free_task(Name, Deadline, R, X, Y, Type);
-// 	+active_task(Name, Deadline, R, X, Y, Type);
-// 	-+state(find_blocks).
-
-	
-
-// Agent continues to move towards the same direction considering that if the previous move was success (initial Exploration*)
-// @explore_success
-// +!explore: 
-// 	agent_pos(X_self, Y_self) & 
-// 	lastAction(move) & 
-// 	lastActionResult(success) & 
-// 	lastActionParams([Dir]) & 
-// 	check_direction(_, _, Dir) <-
-
-// 	!move(Dir).
-
-
 // when the agent is in exploration state , it can move clockwise in a direction for 5 steps and once 5 steps is completed the agent will move in rotation
 // different to the previous rotation( cw/ccw) and the agent will move in that direction.
 @explore_pattern
