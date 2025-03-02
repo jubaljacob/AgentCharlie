@@ -21,43 +21,53 @@ step_count(0).
 
 +!start : true <-
 	.print("Hello massim world.").
-
-// //【step】 Try to query free_task for a task. The task is deleted from free_task after a successful fetch. 
-// +step(S) : free_task(Name, Deadline, Rew,X,Y,Type) <-
-// 	-free_task(Name, Deadline, Rew,X,Y,Type);
-//     if(?lastAction(move)){
-//         .print("Agent is moving");
-//         -+step_count(S);
-//     }.
     
 +step(S) : lastAction(move) & step_count(Count) <-
     -+step_count(Count+1).
 
-// 【actionID】 If not, choose to execute an appropriate plan.
-+actionID(ID) : state(X) & X == explore <- 
+// Explore state
++actionID(ID) : state(State) & State == explore <- 
 	!explore.
 
+// Find task state
++actionID(ID) : state(State) & State == find_task <- 
+	!look_for_task.
 
-+actionID(ID) : state(X) & X == find_blocks <- 
-    .print("Agent is in state ",X);
+// Find block state
++actionID(ID) : state(State) & State == find_blocks <- 
+    // .print("Agent is in state ",State);
 	!explore.
 
+// Percept and add dispenser to local beliefs if never been before
+@percept_dispenser
 +thing(X, Y, dispenser, Type) : 
-    agent_pos(X0,Y0) <-
+    agent_pos(X_self, Y_self) &
+    not(location(dispenser, Type,(X_self+X),(Y_self+Y))) <-
     
-	+location(dispenser,Type,(X0+X),(Y0+Y)).
+	+location(dispenser,Type,(X_self+X),(Y_self+Y)).
 
-+thing(X, Y, goal, Type) : 
-    agent_pos(X0,Y0) <-
+// Percept and add goal to local beliefs if never been before
+@percept_goal
++goal(X, Y) : 
+    agent_pos(X_self, Y_self)
+    not(location(goal,_,(X_self+X),(Y_self+Y))) <-
     
-	+location(goal,Type,(X0+X),(Y0+Y)).
-    
+	+location(goal,null,(X_self+X),(Y_self+Y)).
 
-+goal(X,Y) :  
-    agent_pos(X0,Y0) <- 
-    
-	+location(goal,null,(X0+X),(Y0+Y));
-    .print("Goal detected at ",X,",",Y).
+// When agent receive a single block task assignment from server
+@reveive_task_assignment_single_block
++task(Name, Deadline, R, Params) : 
+    (.length(Params) == 1) & 
+    (.member(req(X, Y, Type)), Params) <-
+
+    +free_task(Name, Deadline, R, X, Y, Type);
+
+// If agent received other agent took a task, remove task from agent's belief
++task_assigned(Name)[source(A)] : free_task(Name, _, _, _ , _, _) <- 
+
+    -free_task(Name, _, _, _ , _, _);
+    .print("Task ", Name, " is taken by agent ", A)/
+
  
 // +actionID(ID) :  state(find_blocks) & target_dispenser(Type,X,Y) <-
 // 	!move_to_dispenser(X,Y,Type).

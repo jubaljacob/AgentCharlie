@@ -56,6 +56,16 @@
     !update_block_rotation(R_Action);
     !request_from_dispenser(X, Y, Type).
 
+// Attach block if the desired block type is already at the dispenser
+@request_from_dispenser_block_exist
++!request_from_dispenser(X, Y, Type) : 
+    agent_pos(X_self, Y_self) &
+    check_direction((X-X_self), (Y-Y_self), Dir) &
+    thing((X-X_self), (Y-Y_self), block, Type) & 
+    free_direction(Dir) <-
+
+    !attach_to_block(Dir, Type).
+
 // Request block from dispenser if adjacent direction is free, then add to mapper
 @request_from_dispenser_free
 +!request_from_dispenser(X, Y, Type) : 
@@ -67,27 +77,25 @@
     request(Dir);
     !attach_to_block(Dir).
 
-// Attach block if the desired block type is already at the dispenser
-@request_from_dispenser_block_exist
-+!request_from_dispenser(X, Y, Type) : 
-    agent_pos(X_self, Y_self) &
-    check_direction((X-X_self), (Y-Y_self), Dir) &
-    thing((X-X_self), (Y-Y_self), block, Type) & 
-    free_direction(Dir) <-
-
-    !attach_to_block(Dir).
-
 // When a block is attached, add to belief that a block is with the agent (direction now not free) and agent changes to goal state.
 @attach_to_block
-+!attach_to_block(Dir) <-
++!attach_to_block(X, Y, Dir, Type) <-
 
     attach(Dir);
     +block(Dir, Type);
     -free_direction(Dir);
     -+state(goal_state).
 
+// If attach block fails, and dispenser is found, attempt again
+@fail_attach_block
+-!attach_to_block(X, Y, _, Type) : 
+    thing(X, Y, dispenser, Type) <- 
+
+    !request_from_dispenser(X, Y, Type).
+
 // If attach block fails, sleep for 0.2 seconds and attempt again
--!attach_to_block(Dir) <- 
+@backup_fail_attach_block
+-!attach_to_block(Dir, Type) <- 
 
     .wait(200);
-    !attach_to_block(Dir).
+    !request_from_dispenser(Dir).
