@@ -1,6 +1,5 @@
 
 { include("strategy/explore.asl") }
-{ include("strategy/obstacle_detection.asl") }
 { include("strategy/path.asl") }
 { include("strategy/rotate.asl") }
 { include("strategy/service.asl") }
