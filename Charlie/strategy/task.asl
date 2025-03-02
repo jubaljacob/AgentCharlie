@@ -37,6 +37,17 @@
     !explore;
     !look_for_task.
 
+// Take task and broadcast to all agents to notify them that task is no longer applicable, if agent has block, dont need go dispenser
+@take_task_submit_with_block
++!take_task(Name, Deadline, R, X, Y, Type) : 
+    free_task(Name, _, _, _ , _, _) &
+    block(B_Dir, Type) <-
+
+    .broadcast(tell, task_assigned(Name));
+    -+state(goal_state);
+    -free_task(Name, _, _, _ , _, _);
+    +active_task(Name, Deadline, R, X, Y, Type).
+
 // Take task and broadcast to all agents to notify them that task is no longer applicable
 @take_task
 +!take_task(Name, Deadline, R, X, Y, Type) : 
@@ -49,14 +60,14 @@
 
 // If submit task was success, change state belief to explore state, tell other agents task succeed
 @submit_task
-+!submit_task(Task, B_Dir, Type) : Name(Ag) <-
++!submit_task(Task, B_Dir, Type) : name(Ag) <-
 
     submit(Task);
     .broadcast(tell,task_attempt_succeed(Task,Ag));
     -active_task(_,_,_,_,_,_);
     -block(B_Dir, Type);
     +free_direction(B_Dir);
-    -+state(explore).
+    -+state(find_task).
 
 // If agent fails to submit then run away
 @submit_task_failed
@@ -70,4 +81,4 @@
     .broadcast(tell,failed_attempt_task(Task, Ag));
     -active_task(Name,_,_,_,_,_);
     -block(B_Dir, Type);
-    -+state(explore).
+    -+state(find_task).

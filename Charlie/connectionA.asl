@@ -60,9 +60,14 @@ step_count(0).
 
     !move_to_goal(X_g, Y_g).
 
-// If in find goal state, but no targeted goal, attempt look for goal
-// +actionID(ID) : state(State) & State == goal_state  <-
-//     -+state(find_blocks).
+// If in find goal state, but no targeted goal, attempt look for nearest goal and submit
++actionID(ID) : state(State) & 
+    State == goal_state &
+     not(targeted_goal(X_g, Y_g))  <-
+
+    !find_nearest_goal(X_self, Y_self, Xg, Yg);
+    +targeted_goal(X_g, Y_g);
+    !move_to_goal(X_g, Y_g).
 
 // Percept and add dispenser to local beliefs if never been before
 @percept_dispenser
