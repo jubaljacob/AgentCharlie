@@ -12,8 +12,8 @@ random_dir(DirList,RandomNumber,Dir) :- (RandomNumber <= 0.25 & .nth(0,DirList,D
 +!monitor_percepts : true <-
     !process_things;
 	!process_goals;
-	!process_tasks;
-    !monitor_percepts.
+	!process_tasks.
+
 
 +!process_things <-  
     .findall([X, Y, Details, Type], thing(X, Y, Details, Type), ThingList);
@@ -86,6 +86,7 @@ random_dir(DirList,RandomNumber,Dir) :- (RandomNumber <= 0.25 & .nth(0,DirList,D
 	
 	.print("Received: ", K, " State is:", S, " Task chosen: ", C, " Action taken: ", T," Action Result: ", J, " Alligned: ", A).
 	/*!move_random.*/
+	
 //    skip.
 
 +!move_random : .random(RandomNumber) & random_dir([n,s,e,w],RandomNumber,Dir)
