@@ -84,8 +84,7 @@ step_count(0).
 @reveive_task_assignment_single_block
 +task(Name, Deadline, R, Params) : 
     (.length(Params) == 1) & 
-    (.member(req(X, Y, Type)), Params) <-
-
+    .member(req(X, Y, Type), Params) <-
     +free_task(Name, Deadline, R, X, Y, Type).
 
 // If agent received other agent took a task, remove task from agent's belief
