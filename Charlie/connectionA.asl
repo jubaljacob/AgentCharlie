@@ -104,7 +104,7 @@ step_count(0).
 +failed_attempt_task(Task, Ag) : 
     not(free_task(Task, _, _, _ , _, _)) &
     task(Task, Deadline, R, Params) &
-    (.member(req(X, Y, Type)), Params) <-
+    .member(req(X, Y, Type), Params) <-
 
     .print(Ag, " has failed task submission, adding task ", Task, "back to free task belief");
     +free_task(Name, Deadline, R, X, Y, Type).
