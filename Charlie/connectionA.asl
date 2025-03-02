@@ -66,7 +66,7 @@ step_count(0).
 +task_assigned(Name)[source(A)] : free_task(Name, _, _, _ , _, _) <- 
 
     -free_task(Name, _, _, _ , _, _);
-    .print("Task ", Name, " is taken by agent ", A)/
+    .print("Task ", Name, " is taken by agent ", A).
 
  
 // +actionID(ID) :  state(find_blocks) & target_dispenser(Type,X,Y) <-
