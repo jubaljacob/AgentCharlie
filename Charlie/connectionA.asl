@@ -1,6 +1,5 @@
 
 { include("strategy/explore.asl") }
-{ include("strategy/obstacle_detection.asl") }
 { include("strategy/path.asl") }
 { include("strategy/rotate.asl") }
 { include("strategy/service.asl") }
@@ -46,10 +45,10 @@ step_count(0).
     state(State) & State == find_blocks & 
     active_task(Name, _, _, _, _, Type) <- 
 
-    !find_optimal_plan(X_self, Y_self, Type, plan(Xd, Yd, Xg, Yg, _));
+    !find_optimal_plan(X_self, Y_self, Type, plan(X_d, Y_d, X_g, Y_g, _));
     .print("An op plan is found for task ", Name);
-    +targeted_dispenser(Xd, Yd);
-    +targeted_goal(Xg, Yg);
+    +targeted_dispenser(X_d, Y_d);
+    +targeted_goal(X_g, Y_g);
     !move_to_dispenser(X_d, Y_d, Type).
 
 // Find goal state
@@ -64,7 +63,7 @@ step_count(0).
     State == goal_state &
      not(targeted_goal(X_g, Y_g))  <-
 
-    !find_nearest_goal(X_self, Y_self, Xg, Yg);
+    !find_nearest_goal(X_self, Y_self, X_g, Y_g);
     +targeted_goal(X_g, Y_g);
     !move_to_goal(X_g, Y_g).
 

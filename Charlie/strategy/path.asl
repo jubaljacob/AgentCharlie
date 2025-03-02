@@ -3,7 +3,7 @@
 +!measure_distance_from_agent(X_self, Y_self, Thing, Type, ThingDistances) <-
     .findall(
             point(Xd,Yd,Distance),
-                (location(Thing,Xd,Yd,Type) &
+                (location(Thing,Type,Xd,Yd) &
                 calculate_distance(X_self, Y_self, Xd, Yd, Distance)),
             ThingDistances
     ).
@@ -16,7 +16,7 @@
     .findall(
         plan(DispX, DispY, GoalX, GoalY, TotalDistance),
         (   .member(point(DispX, DispY, DispDist), DispenserDistances) &
-            location(goal, GoalX, GoalY, _) &
+            location(goal, _, GoalX, GoalY) &
             calculate_distance(DispX, DispY, GoalX, GoalY, GoalDist) &
             TotalDistance = DispDist + GoalDist
         ),
@@ -25,7 +25,7 @@
     .min(AllPlans, plan(Xd_F,Yd_F,Xg_F,Yg_F,MinDist)).
 
 @find_optimal_plan_failed
--!find_optimal_plan(_,_,_, plan(null,null,null,null,null)) <- .print("No plan found!").
+-!find_optimal_plan(_,_,_, plan(null,null,null,null,null)) <- .print("No plan found!"); false.
 
 // To calculate the manhattan distance between from/to X & Y
 calculate_distance(X1, Y1, X2, Y2, Dist) :-
