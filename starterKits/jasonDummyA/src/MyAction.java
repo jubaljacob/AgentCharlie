@@ -3,7 +3,9 @@ package mypackage;
 import jason.asSemantics.*;
 import jason.asSyntax.*;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.*;
+
 
 public class MyAction extends DefaultInternalAction {
     ArrayList<String[]> map = new ArrayList<>();
@@ -21,6 +23,11 @@ public class MyAction extends DefaultInternalAction {
     int x2 = 0;
     int y2 = 0;
     int attempt = 0;
+    boolean attemptsubmit = false;
+    int direction = 0;
+    int stepstaken = 0;
+    int priorstate = 0;
+    boolean rotation = false;
     @Override
     public Object execute(TransitionSystem ts, Unifier un, Term[] args) throws Exception {
         
@@ -29,12 +36,20 @@ public class MyAction extends DefaultInternalAction {
         
         
         if (function == 1) {
+
+            
+
             int action = 0;
             String lastaction = args[6].toString();
             String lastresult = args[5].toString();
-            if (state == 9 && lastaction.equals("submit") && (lastresult.equals("failed_target") || lastresult.equals("failed"))) {
-                attached = attached + 1;
-            } 
+
+            if(lastaction.equals("rotate") && lastresult.equals("failed") ){ 
+                if (rotation == false) {
+                    rotation = true;
+                } else if (rotation == false)  {
+                    rotation = false;
+                }
+            }
             
             if (state == -1) {
                 action = 0;
@@ -48,6 +63,7 @@ public class MyAction extends DefaultInternalAction {
                 int y = 0;
                 for(int i = 0; i < map.size(); i++) {
                     String[] entry = map.get(i);
+                    
                     
                     if (entry[2].equals("dispenser")) {
                         x = Integer.valueOf(entry[0]);
@@ -69,10 +85,7 @@ public class MyAction extends DefaultInternalAction {
                 } else{
                     state = 1;
                 }
-                
 
-                
-        
             } else if (state == 1) { 
                 boolean targetReached = (Math.abs(targetX) == 1 && targetY == 0) || (Math.abs(targetY) == 1 && targetX == 0);
                 //System.out.println("closest Dispenser at X:" + targetX + " Y:" + targetY);
@@ -115,7 +128,6 @@ public class MyAction extends DefaultInternalAction {
                     }
                 }
                 //System.out.println("Distance is: " + distancetoclosestdispenser);
-                System.out.println("Held Block Type" +  type);
                 if (distancetoclosestdispenser != 1){
                     state = 0;
                 } else {
@@ -152,7 +164,11 @@ public class MyAction extends DefaultInternalAction {
                     state = 4;
                 } 
             } else if (state == 4) { 
-                action = 13;
+                if (rotation == false) { 
+                    action = 13;
+                } else if (rotation == true) { 
+                    action = 14;
+                }
                 state = 2;
                 attached = attached + 1;
                 if(attached > 3){
@@ -161,9 +177,11 @@ public class MyAction extends DefaultInternalAction {
             } else if (state == 5) { 
                 int distancetoclosestgoal = 1000;
                 int timeforpickup = 0;
-                
+                int entityx = 0;
+                int entityy = 0; 
                 int x = 0;
                 int y = 0;
+                boolean checkentity = false;
                 for(int i = 0; i < map.size(); i++) {
                     String[] entry = map.get(i);
                     //System.out.println("Checking " + entry[2] + " far away at X:" + entry[0] + " Y:" + entry[1]);
@@ -179,6 +197,13 @@ public class MyAction extends DefaultInternalAction {
                             targetX = x;
                             targetY = y;
                         }
+                    } else if (entry[2].equals("entity")) { 
+                        entityx = Integer.valueOf(entry[0]);
+                        entityy = Integer.valueOf(entry[1]);
+
+                        if (entityx != 0 || entityy != 0){
+                            checkentity = true;
+                        }
                     }
                 }
                 //System.out.println("closest Goal is " + distancetoclosestgoal + " far away at X:" + targetX + " Y:" + targetY);
@@ -188,6 +213,16 @@ public class MyAction extends DefaultInternalAction {
                 } else{
                     state = 6;
                 }
+
+                if(checkentity == true) { 
+                    if ((Math.abs(entityx - x) <= 1 && Math.abs(entityy - y) <= 1) && distancetoclosestgoal < 100) {
+                        priorstate = 5;
+                        state = 20;
+                        action = 0;
+                    }
+                }
+
+
                 
             } else if (state == 6) {
                 boolean targetReached = (Math.abs(targetX) == 0 && targetY == 0);
@@ -211,14 +246,45 @@ public class MyAction extends DefaultInternalAction {
                         }
                     } 
                 } else if (targetReached){
-                    state = 7; // Arrived at correct position
-                    action = 0;
+                    boolean cont = false;
+                    for(int i = 0; i < map.size(); i++) {
+                        String[] entry = map.get(i);
+                        //System.out.println("Checking " + entry[2] + " far away at X:" + entry[0] + " Y:" + entry[1]);
+                        
+                        if (entry[2].equals("Goal")) {
+                            int x = Integer.valueOf(entry[0]);
+                            int y = Integer.valueOf(entry[1]);
+    
+                            int sum = Math.abs(x) + Math.abs(y);
+                            
+                            if (sum < 1) {
+                                cont = true;
+                            }
+                        } 
+                    }
+
+                    if (cont == true) {
+                        state = 8; // Arrived at correct position
+                        action = 0; 
+                    } else {
+                        state = 5; // Arrived at correct position
+                        action = 0; 
+                    }
+
+                    
                 }
-            } else if (state == 7) {    
+
+
+                
+            } else if (state == 7) {  
+                boolean checkentity = false; 
+                int x = 0;
+                int y = 0;
+                
                 for(int i = 0; i < map.size(); i++) {
                     String[] entry = map.get(i);
-                    int x = 0;
-                    int y = 0;
+                    
+                    
                     //System.out.println("Checking " + entry[2] + " far away at X:" + entry[0] + " Y:" + entry[1]);
                     
                     if (entry[2].equals("Goal")) {
@@ -237,8 +303,9 @@ public class MyAction extends DefaultInternalAction {
                             action = 1;
                             state = 8;
                         }
-                    }
+                    } 
                 }
+                
 
                 
             } else if (state == 8) {
@@ -251,13 +318,36 @@ public class MyAction extends DefaultInternalAction {
                     }
                 }
                 un.unifies(args[3], new StringTermImpl(name));
-                action = 0;
-                state = 9;
+
+                boolean progress = false;
+                for(int i = 0; i < map.size(); i++) {
+                    String[] entry = map.get(i);
+                    
+                    
+                    //System.out.println("Checking " + entry[2] + " far away at X:" + entry[0] + " Y:" + entry[1]);
+                    
+                    if (entry[2].equals("Goal")) {
+                        int x = Integer.valueOf(entry[0]);
+                        int y = Integer.valueOf(entry[1]);
+                        if (x == 0 || y == 0) {
+                            
+                            progress = true;
+                        } 
+                    } 
+                }
+
+                if(progress == true) { 
+                    action = 0;
+                    state = 9;
+                } else if (progress == false) { 
+                    action = 0;
+                    state = 5;
+                }
                 
             } else if (state == 9) {
                 un.unifies(args[3], new StringTermImpl(name));
                 action = 0;
-                boolean submit = false;
+                
                 int connectedblocks = 0;
                 Set<String> printedBlocks = new HashSet<>();
                 for (int i = 0; i < map.size(); i++) {
@@ -266,44 +356,108 @@ public class MyAction extends DefaultInternalAction {
                         String blockKey = entry[0] + "," + entry[1] + "," + type;
                         if (!printedBlocks.contains(blockKey)) {
                             printedBlocks.add(blockKey);
-                            System.out.println("Blocks at X:" + entry[0] + " Y:" + entry[1] + " of type: " + type);
-                            
                             x2 = Integer.valueOf(entry[0]);
                             y2 = Integer.valueOf(entry[1]);
                             if((x2 == 0 && y2 == 1) || (x2 == 0 && y2 == -1) || (x2 == 1 && y2 == 0) || (x2 == -1 && y2 == 0)) {
                                 connectedblocks = connectedblocks + 1;
                             }
-                            if (x2 == x1 && y2 == y1) {
-                                submit = true;
-                            }   
                         }
                     }
                 }
-                System.out.println("Task asks for Blocks at X:" + x1 + " Y:" + y1 + " of type: " + type);
-                System.out.println("Number of blocks attacked: " + connectedblocks);
-                if (submit == false) {
-                    un.unifies(args[4], new NumberTermImpl(0));
-                    action = 13;
-                    attempt = attempt + 1;
-                    if (attempt > 3) {
-                        attempt = 0;
-                        state = 8;
-                    }
-                } else if (submit == true) {
-                    un.unifies(args[4], new NumberTermImpl(1));
-                    
+                //System.out.println("Task asks for Blocks at X:" + x1 + " Y:" + y1 + " of type: " + type);
+                //System.out.println("Past Attempt Last Turn: " + attemptsubmit + " Number of attempts: " + attempt);
+                if(attemptsubmit == false){
                     action = 15;
-                    attached = attached - 1;
-                    
-                    state = 8;
-                    
+                    attempt = attempt + 1;
+                    attemptsubmit = true;
+                } else if (attemptsubmit == true) { 
+                    if (rotation == false) { 
+                        action = 13;
+                    } else if (rotation == true) { 
+                        action = 14;
+                    }
+                    attemptsubmit = false;
                 }
-                if (connectedblocks < 1) { 
-                    state = 0;
-                    action = 0;
+                if (attempt > 4) {
+                    state = 8;
+                    attempt = 0;
                 }
 
+                if (connectedblocks < 1) {
+                    state = 0;
+                    action = 0;
+                    attached = 0;
+                }
+            }   else if (state == 20) { 
+                if(direction == 0){
+                    Random random = new Random();
+                    direction = random.nextInt(4) + 1;
+                } else if (direction == 1) {
+                    action = 1;
+                    stepstaken = stepstaken + 1;
+                } else if (direction == 2) {
+                    action = 2;
+                    stepstaken = stepstaken + 1;
+                } else if (direction == 3) {
+                    action = 3;
+                    stepstaken = stepstaken + 1;
+                } else if (direction == 4) {
+                    action = 4;
+                    stepstaken = stepstaken + 1;
+                } 
+
+                if (stepstaken > 5) {
+                    action = 0;
+                    stepstaken = 0;
+                    if(priorstate == 3){
+                        state = 0;
+                    } else if (priorstate == 5) {
+                        state = 5;
+                    }
+                }
             }
+
+            if(lastaction.equals("move") && (lastresult.equals("failed_path") || lastresult.equals("failed_forbidden"))){
+                if(action == 1){ 
+                    action = 3;
+                } else if (action == 2) {
+                    action = 4;
+                } else if (action == 3) {
+                    action = 1;
+                } else if (action == 4) {
+                    action = 2;
+                }
+            } 
+
+    
+
+            if(state == 3) {
+                boolean shouldntattach = false;
+                int x = 0;
+                int y = 0;
+                for (int i = 0; i < map.size(); i++) {
+                    String[] entry = map.get(i);
+                    if (entry[2].equals("entity")) {
+                        x = Integer.valueOf(entry[0]);
+                        y = Integer.valueOf(entry[1]);
+
+                        int sum = Math.abs(x) + Math.abs(y);
+                        
+                        if(sum < 3 && sum > 0){
+                            shouldntattach = true;
+                        }
+                        
+                    }
+                }
+                if (shouldntattach == true) {
+                    action = 0;
+                    state = 20;
+                    priorstate = 3;
+                }
+            }
+
+            
+            
             
             tasks.clear();
             map.clear();
@@ -367,6 +521,7 @@ public class MyAction extends DefaultInternalAction {
             // Coordinates of the object
             String X = args[1].toString();
             String Y = args[2].toString();
+            
             // Details on the object (Is it a dispenser, an entity, a block, etc)
             String Details = args[3].toString();
             // Further details, such as if dispenser is b0 or b1
@@ -426,6 +581,3 @@ public class MyAction extends DefaultInternalAction {
         return true;
     }
 }
-
-
-
