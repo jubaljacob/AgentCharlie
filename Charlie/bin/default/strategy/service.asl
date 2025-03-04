@@ -22,7 +22,7 @@ to_dispenser_direction(0, 0, e).
 // Condition 1: When agent is at the corner, move to adjacent position X = 1/-1
 // Condition 2: Agent always move X position to location, then move Y
 to_dispenser_direction(X, _, e):- X >= 1.
-to_dispenser_direction(X, _, w):- X <= -1.
+to_dispenser_direction(X, _, w):- X =< -1.
 to_dispenser_direction(_, Y, s):- Y > 1.
 to_dispenser_direction(_, Y, n):- Y < -1.
 
@@ -46,17 +46,11 @@ rotating_dir(F_Dir, T_Dir, ccw) :- direction(F_Dir, F_Idx) & direction(T_Dir, F_
 goal_rotation(X, Y, Dir) :- rotation(X, Y, Dir) & not (Dir == null).
 goal_rotation(_, _, Dir) :- Dir = ccw.
 
-// Rotate the opposite direction when obstacle meets at original rotation direction
 obstacle_rotation(cw, ccw).
 obstacle_rotation(ccw, cw).
 
-// Goal directed moving direction
 to_goal_direction(X,_,w) :- X < 0.
 to_goal_direction(X,_,e) :- X > 0.
 to_goal_direction(_,Y,n) :- Y < 0.
 to_goal_direction(_,Y,s) :- Y > 0.
 to_goal_direction(_,_,null).
-
-// Calculation if direction should change in every 5 steps in exploration
-dirch_step_calc(CStep,PStep) :- ((CStep - PStep ) mod 5) == 0.
-random_dir(DirList,RandomNumber,Dir) :- (RandomNumber <= 0.25 & .nth(0,DirList,Dir)) | (RandomNumber <= 0.5 & .nth(1,DirList,Dir)) | (RandomNumber <= 0.75 & .nth(2,DirList,Dir)) | (.nth(3,DirList,Dir)).
