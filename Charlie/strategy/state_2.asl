@@ -3,6 +3,7 @@
     ?targetY(TargetY);
     ?is_target_reached((math.abs(TargetX) == 1 & TargetY == 0) | (math.abs(TargetY) == 1 & TargetX == 0));
     
+    // Initialize variables
     +distance_to_closest_dispenser(1000);
     
     for (dispenser(X, Y, Type)) {
@@ -25,23 +26,23 @@
         ?targetY(TY);
         
         if (TX == -1 & TY == 0) {
-            -+action(7);  
+            -+action(7);  // Request block from East
             -+dir(4);
             -+state(3);
         } else {
             if (TX == 1 & TY == 0) {
-                -+action(8);  
+                -+action(8);  // Request block from West
                 -+dir(3);
                 -+state(3);
             } else {
                 if (TX == 0 & TY == 1) {
-                    -+action(6);  
+                    -+action(6);  // Request block from South
                     -+dir(2);
                     -+state(3);
                 } else {
                     if (TX == 0 & TY == -1) {
                         -+dir(1);
-                        -+action(5);  
+                        -+action(5);  // Request block from North
                         -+state(3);
                     }
                 }
