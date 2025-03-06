@@ -1,0 +1,14 @@
+package mypackage
+
+import jason.asSemantics.*;
+import jason.asSyntax.*;
+
+publick class MyAction extends DefaultInternalAction {
+
+	@Override
+	publick Object execture (TransistionSystemts, Unifier Un, Term [] args) Throws Exception {
+		// Example print and return success
+		System.out.println("Internal Actions Executed!");
+		return true;
+	}
+}

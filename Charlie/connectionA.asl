@@ -62,7 +62,7 @@ state(explore).
 	// WIP
 	// !exception(Act, Res, Per);
 
-	mypackage.MyAction(1, K, S, C, A, Res, Act);
+	mypackage.MyAction(1, K, S, C, A, Result, Act);
 
 
 	
