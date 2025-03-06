@@ -19,6 +19,16 @@
     !measure_distance_from_agent(X_self, Y_self, goal, null, ThingDistances);
     .min(ThingDistances, point(Xg,Yg,Distance)).
 
+@find_agent_has_block_number
++!find_agent_block(BlockNumber) <- 
+    .findall(
+            Type,
+                (location(block,Type,Xd,Yd) &
+                ((math.abs(Xd) == 1 & math.abs(Yd) == 0) | (math.abs(Xd) == 0 | math.abs(Yd) == 1))),
+            Blocks
+    );
+    .length(Blocks, BlockNumber).
+
 // To calculate the manhattan distance between from/to X & Y
 calculate_distance(X1, Y1, X2, Y2, Dist) :-
     Dist = math.sqrt(((X2 - X1)*(X2 - X1)) + ((Y2 - Y1)*(Y2 - Y1))).

@@ -36,7 +36,7 @@
     DispenserY = math.abs(Y);
 
     // When agent is adjacent to dispenser
-    if ( (DispenserX == 1 & DispenserY == 0) || (DispenserX == 0 & DispenserY == 1) ) {
+    if ( (DispenserX == 1 & DispenserY == 0) | (DispenserX == 0 & DispenserY == 1) ) {
         -+state(request_block);
         !decision_maker;
     }
@@ -122,8 +122,10 @@
 
     !find_nearest_goal(0, 0, Xg, Yg);
     if (Xg == 0 && Yg == 0) {
-        .print("hahaha");
+        
     } 
     else {
+        // When agent is not on top of the goal, that says if agent is on top, nearest should be 0,0
+        // Change the state to explore to trigger the agent to move_to_goal when agent carries a block
         -+state(explore);
     }.
