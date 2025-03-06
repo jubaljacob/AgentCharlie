@@ -16,7 +16,7 @@
     -+state(move_to_dispenser);
     !decision_maker.
 
-// Look for nearest goal
+// Look for nearest goal when agent carries block
 +!decision_maker : state(State) & 
     State == explore &
     block(_) &
@@ -109,12 +109,21 @@
                 !action(move, n);
             }
         }
-    }
+    }.
 
 // WIP: Check if agent IS REALLY at the goal position
 
 // Agent search for goal position
-// +!decision_maker : state(State) & 
-//     State == submit_goal &
-//     target_goal(X, Y) <- 
++!decision_maker : state(State) & 
+    State == submit_goal &
+    block(Type) &
+    free_task(Name, _, _, X, Y, Type) &
+    target_goal(X, Y) <- 
 
+    !find_nearest_goal(0, 0, Xg, Yg);
+    if (Xg == 0 && Yg == 0) {
+        .print("hahaha");
+    } 
+    else {
+        -+state(explore);
+    }.
