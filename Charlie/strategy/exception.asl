@@ -1,9 +1,3 @@
-// +!percept(Act, _Result, Params) <- 
-
-//     if (Act == move) {
-
-//     }.
-
 // If move action failed, move 90 perpendicular, then change belief to go another axis so agent behave on diff move strategy
 +!failure_handler(move, _Result, Direction) <-
     !convert_move_axis;
@@ -23,7 +17,8 @@
     
 
 // If at requesting block, but rotation failed, straight change state to move to goal?
-
++!failure_handler(rotate, _Result, Direction) : state(request_block) <- 
+    -+state(explore).
 
 // If request failed, make belief to rotate otherwise
 

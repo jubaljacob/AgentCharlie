@@ -106,7 +106,7 @@
     }
     else {
         // If not adjacent to dispenser, go back to finding dispenser
-        -+state(move_to_dispenser);
+        -+state(explore);
         !decision_maker;
     }.
 
