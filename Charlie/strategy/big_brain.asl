@@ -3,11 +3,11 @@
     State == explore & 
     attached(Blocks) & 
     Blocks == 0 &
-    location(dispenser, _Type, _, _) <-
+    location(dispenser, _Type, Xd, Yd) <-
     .print("State1");
 
-    !find_nearest_dispenser(0, 0, Xd, Yd, _Type);
-    +target_dispenser(_Type, Xd, Yd);
+    // !find_nearest_dispenser(0, 0, Xd, Yd, _Type);
+    +target_dispenser(Xd, Yd);
     -+state(move_to_dispenser);
     !decision_maker.
 
@@ -39,12 +39,12 @@
 // Look for nearest goal when agent carries block
 +!decision_maker : state(State) & 
     State == explore &
-    location(goal, _Type, X, Y) & 
+    location(goal, _Type, Xg, Yg) & 
     attached(Blocks) & 
     Blocks > 0 <- 
     .print("State4");
 
-    !find_nearest_goal(0, 0, Xg, Yg);
+    // !find_nearest_goal(0, 0, Xg, Yg);
     +target_goal(Xg, Yg);
     -+state(move_to_goal);
     !decision_maker.
@@ -80,47 +80,63 @@
 // Move to nearest dispenser
 +!decision_maker : state(State) & 
     State == move_to_dispenser &
-    target_dispenser(_Type, X, Y) <- 
+    target_dispenser(X, Y) <- 
     .print("State7");
 
-    DispenserX = math.abs(X);
-    DispenserY = math.abs(Y);
+    // .print("Sensed ", Xt, ", ", Yt);
+    .print("Target ", X, ", ", Y);
+    // DispenserX = math.abs(X);
+    // DispenserY = math.abs(Y);
 
+    if (x == 0 & y == 0) {
+        // If the agent is on top of dispenser
+        NewY = Y + 1;
+        -+target_dispenser(X,NewY);
+        !action(move, n);
+    }
     // When agent is adjacent to dispenser
-    if ( (DispenserX == 1 & DispenserY == 0) | (DispenserX == 0 & DispenserY == 1) ) {
+    if ( (math.abs(X) == 1 & Y == 0) | (X == 0 & math.abs(Y) == 1) ) {
+        .print("Adjacent");
         -+state(request_block);
         !decision_maker;
     }
     // Agent moves X then moves Y to dispenser
     else {
-        if (x == 0 | y == 0) {
-            !convert_move_axis;
-        }
+        // if (X == 0 | Y == 0) {
+        //     !convert_move_axis;
+        // }
 
-        ?move_axis(Axis);
-        if (math.abs(X) > 0 & Axis == x) {
+        // ?move_axis(Axis);
+        if (math.abs(X) > 0) {
+            .print("Move x");
             if (X > 0) { 
-                -+target_dispenser(X-1,Y);
+                NewX = X - 1;
+                -+target_dispenser(NewX,Y);
                 !action(move, e);
             }
-            else {
-                -+target_dispenser(X+1,Y);
+            elif(X < 0) {
+                NewX = X + 1;
+                -+target_dispenser(NewX,Y);
                 !action(move, w);
             }
         }
-        elif (math.abs(Y) > 0 & Axis = y) {
+        elif (math.abs(Y) > 0) {
+            .print("Move y");
             if (Y > 0) {
-                -+target_dispenser(X,Y-1);
+                NewY = Y - 1;
+                -+target_dispenser(X,NewY);
                 !action(move, s);
             }
-            else {
-                -+target_dispenser(X,Y+1);
+            elif (Y < 0) {
+                NewY = Y + 1;
+                -+target_dispenser(X,NewY);
                 !action(move, n);
             }
         }
         else {
             // If the agent is on top of dispenser
-            -+target_dispenser(X,Y+1);
+            NewY = Y + 1;
+            -+target_dispenser(X,NewY);
             !action(move, n);
         }
     }.
@@ -129,7 +145,7 @@
 // Request block from dispenser
 +!decision_maker : state(State) & 
     State == request_block &
-    target_dispenser(Type, X, Y) <- 
+    target_dispenser(X, Y) <- 
     .print("State8");
 
     -target_dispenser(X,Y);
@@ -228,21 +244,21 @@
         ?move_axis(Axis);
         if (math.abs(X) > 0 & Axis == x) {
             if (X > 0) { 
-                -+target_dispenser(X-1,Y);
+                -+target_goal(X-1,Y);
                 !action(move, e);
             }
             else {
-                -+target_dispenser(X+1,Y);
+                -+target_goal(X+1,Y);
                 !action(move, w);
             }
         }
         elif (math.abs(Y) > 0 & Axis == y) {
             if (Y > 0) {
-                -+target_dispenser(X,Y-1);
+                -+target_goal(X,Y-1);
                 !action(move, s);
             }
             else {
-                -+target_dispenser(X,Y+1);
+                -+target_goal(X,Y+1);
                 !action(move, n);
             }
         }
