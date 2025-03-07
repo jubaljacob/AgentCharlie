@@ -1,4 +1,6 @@
 +!action(Action, Param) <-
+
+    .abolish(location(_, _, _, _));
     if (Action == move) {
         !move(Param);
     }

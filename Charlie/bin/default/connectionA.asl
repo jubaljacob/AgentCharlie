@@ -1,8 +1,15 @@
+{ include("strategy/actions.asl") }
+{ include("strategy/big_brain.asl") }
+{ include("strategy/right_brain.asl") }
+{ include("strategy/exception.asl") }
+
 /* Initial beliefs and rules */
 random_dir(DirList,RandomNumber,Dir) :- (RandomNumber <= 0.25 & .nth(0,DirList,Dir)) | (RandomNumber <= 0.5 & .nth(1,DirList,Dir)) | (RandomNumber <= 0.75 & .nth(2,DirList,Dir)) | (.nth(3,DirList,Dir)).
 
 position(0,0).
 state(explore).
+move_axis(x).
+rotate_dir(cw).
 
 /* Initial goals */
 
@@ -61,8 +68,16 @@ state(explore).
 
 	// WIP
 	// !exception(Act, Res, Per);
+	
+	if ((Res == failed) | (Res == failed_target) | (Res == failed_blocked) | 
+		(Res == failed_forbidden) | (Res == failed_path)) {
+			!failure_handler(Act, Res, Par);
+		}
+	else {
+		!decide_action;
+	}
 
-	mypackage.MyAction(1, K, S, C, A, Res, Act);
+	// mypackage.MyAction(1, K, S, C, A, Result, Act);
 
 
 	
