@@ -77,7 +77,7 @@ failed_attempt(0).
 	true.
 
 // Add all leftout tasks and remove all expired tasks
-+!iterate_expired_tasks(TaskList) <-  
++!iterate_tasks(TaskList) <-  
 	for ( .member(free_task(Name, Deadline, R, X, Y, Type), TaskList) ) {
 		+free_task(Name, Deadline, R, X, Y, Type);
 	}.

@@ -3,6 +3,7 @@
     failed_attempt(Attempt) & 
     Attempt > 2 <- 
 
+    -target_goal(X,Y);
     -+state(contigency);
     !call_for_backup(explore).
 
@@ -31,6 +32,7 @@
     failed_attempt(Attempt) & 
     Attempt > 1 <- 
 
+    -target_dispenser(X,Y);
     -+state(explore).
 
 // If rotate at goal fails more than once, go contigency plan and move 5 steps away from this BAD goal
@@ -38,6 +40,7 @@
     failed_attempt(Attempt) & 
     Attempt > 1 <- 
 
+    -target_goal(X,Y);
     -+state(contigency);
     !call_for_backup(explore).
 
@@ -57,6 +60,7 @@
     Blocks > 0 <- 
 
     -dir(_);
+    -target_dispenser(X,Y);
     -+state(contigency);
     !call_for_backup(explore).
 
@@ -82,6 +86,7 @@
 +!failure_handler(attach, failed, _Param) : attached(Blocks) & 
     Blocks > 0 <- 
 
+    -target_dispenser(X,Y);
     -+state(contigency);
     !call_for_backup(explore).
 
