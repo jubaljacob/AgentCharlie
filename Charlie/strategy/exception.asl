@@ -1,17 +1,20 @@
 // If move action failed, move 90 perpendicular
 +!failure_handler(move, _Result, Direction) <-
     
-    if (Direction == n) {
-        !action(move, w);
-    } 
-    elif (Direction == s) {
-        !action(move, e);
-    }
-    elif (Direction == e) {
-        !action(move, n);
-    }
-    elif (Direction == w) {
-        !action(move, s);
+    if (Direction == n | Direction == s) {
+        .random(R);
+        if (R < 0.5) {
+            !action(move, e);
+        } else {
+            !action(move, w);
+        }
+    } else {
+        .random(R);
+        if (R < 0.5) {
+            !action(move, n);
+        } else {
+            !action(move, s);
+        }
     }.
     
 
