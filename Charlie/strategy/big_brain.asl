@@ -84,7 +84,7 @@
             +dir(e);  // East
             !action(request, e);
         } 
-        elif (X == 1 & Y == .0) {
+        elif (X == 1 & Y == 0) {
             +dir(w);  // West
             !action(request, w);
         } 
