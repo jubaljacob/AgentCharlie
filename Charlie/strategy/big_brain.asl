@@ -148,7 +148,7 @@
     target_dispenser(X, Y) <- 
     .print("State8");
 
-    -target_dispenser(X,Y);
+    // -target_dispenser(X,Y);
     
     // Check if agent is adjacent to dispenser
     if ((math.abs(X) == 1 & Y == 0) | (math.abs(Y) == 1 & X == 0)) {
@@ -221,6 +221,7 @@
     ?attached(Count);
     // Check if we've attached enough blocks
     if (Count > 3) {
+        -target_dispenser(X,Y);
         -+state(explore);
         !decision_maker;
     } 
