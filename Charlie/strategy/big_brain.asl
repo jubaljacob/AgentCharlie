@@ -88,27 +88,32 @@
         if (X == -1 & Y == 0) {
             +dir(e);  // East
             !action(request, e);
+            -+state(attach_block);
         } 
         elif (X == 1 & Y == 0) {
             +dir(w);  // West
             !action(request, w);
+            -+state(attach_block);
         } 
         elif (X == 0 & Y == 1) {
             +dir(s);  // South
             !action(request, s);
+            -+state(attach_block);
         } 
         elif (X == 0 & Y == -1) {
             +dir(n);  // North
             !action(request, n);
+            -+state(attach_block);
         }
-        -+state(attach_block);
-        !decision_maker;
+        else {
+            -+state(move_to_dispenser);
+        }
     }
     else {
         // If not adjacent to dispenser, go back to finding dispenser
-        -+state(explore);
-        !decision_maker;
-    }.
+        -+state(move_to_dispenser);
+    }
+    !decision_maker.
 
 // Attach block after request
 +!decision_maker : state(State) & 
@@ -129,7 +134,7 @@
         !action(attach, w);
     }
     
-    // Remove direction belief
+    // Remove direction belief and move to next state
     -dir(Direction);
     -+state(rotate_block);
     !decision_maker.
