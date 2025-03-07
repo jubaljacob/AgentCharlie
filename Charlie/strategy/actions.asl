@@ -1,6 +1,7 @@
 +!action(Action, Param) <-
 
     .abolish(location(_, _, _, _));
+    .abolish(free_task(_, _, _, _, _, _));
     if (Action == move) {
         !move(Param);
     }
@@ -8,7 +9,7 @@
         !request_block(Param);
     }
     elif (Action == attach) {
-        !attach(Param);
+        !attach_block(Param);
     }
     elif (Action == rotate) {
         !rotate(Param);

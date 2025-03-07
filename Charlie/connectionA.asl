@@ -54,45 +54,62 @@ failed_attempt(0).
 		+location(goal, null,  X, Y);
 	}.
 
-// Process all tasks with free task beliefs, make sure no task is left out
 +!process_tasks <-  
     .findall(free_task(Name0, Deadline0, R0, X0, Y0, Type0), 
-		(task(Name0, Deadline0, R0, Params) &
-		 (.length(Params) == 1) & 
-    	 .member(req(X0, Y0, Type0), Params) &
-		 not(free_task(Name0, _, _, _, _, _))), 
-		TaskList);
-    !iterate_tasks(TaskList);
-	.findall(exp_task(Name1, Deadline1, R1, X1, Y1, Type1),
-		(free_task(Name1, Deadline1, R1, X1, Y1, Type1) & 
-		 stepCount(Steps) & 
-		 Steps >= Deadline1),
-		ExpiredTasks);
-	!iterate_expired_tasks(ExpiredTasks).
+			(task(Name0, Deadline0, R0, Params) & 
+			 (.length(Params) == 1) &
+			 .member(req(X0, Y0, Type0), Params)), 
+			TaskList);
+    !iterate_tasks(TaskList).
 
 +!iterate_tasks([]) <-  
     true.
 
-+!iterate_expired_tasks([]) <-
-	true.
-
-// Add all leftout tasks and remove all expired tasks
 +!iterate_tasks(TaskList) <-  
-	for ( .member(free_task(Name, Deadline, R, X, Y, Type), TaskList) ) {
-		+free_task(Name, Deadline, R, X, Y, Type);
+	for ( .member(free_task(Name0, Deadline0, R0, X0, Y0, Type0), TaskList)) {
+		+free_task(Name0, Deadline0, R0, X0, Y0, Type0);
 	}.
+	
 
-+!iterate_expired_tasks(ExpiredTasks) <- 
-	for ( .member(exp_task(Name, Deadline, R, X, Y, Type), ExpiredTasks) ) {
-		-free_task(Name, Deadline, R, X, Y, Type);
-	}.
+// Process all tasks with free task beliefs, make sure no task is left out
+// +!process_tasks <-  
+//     .findall(free_task(Name0, Deadline0, R0, X0, Y0, Type0), 
+// 		(task(Name0, Deadline0, R0, Params) &
+// 		 (.length(Params) == 1) & 
+//     	 .member(req(X0, Y0, Type0), Params) &
+// 		 not(free_task(Name0, _, _, _, _, _))), 
+// 		TaskList);
+//     !iterate_tasks(TaskList);
+// 	.findall(exp_task(Name1, Deadline1, R1, X1, Y1, Type1),
+// 		(free_task(Name1, Deadline1, R1, X1, Y1, Type1) & 
+// 		 stepCount(Steps) & 
+// 		 Steps >= Deadline1),
+// 		ExpiredTasks);
+// 	!iterate_expired_tasks(ExpiredTasks).
 
-// Add task as a free task belief
-@reveive_task_assignment_single_block
-+task(Name, Deadline, R, Params) : 
-    (.length(Params) == 1) & 
-    .member(req(X, Y, Type), Params) <-
-    +free_task(Name, Deadline, R, X, Y, Type).
+// +!iterate_tasks([]) <-  
+//     true.
+
+// +!iterate_expired_tasks([]) <-
+// 	true.
+
+// // Add all leftout tasks and remove all expired tasks
+// +!iterate_tasks(TaskList) <-  
+// 	for ( .member(free_task(Name, Deadline, R, X, Y, Type), TaskList) ) {
+// 		+free_task(Name, Deadline, R, X, Y, Type);
+// 	}.
+
+// +!iterate_expired_tasks(ExpiredTasks) <- 
+// 	for ( .member(exp_task(Name, Deadline, R, X, Y, Type), ExpiredTasks) ) {
+// 		-free_task(Name, Deadline, R, X, Y, Type);
+// 	}.
+
+// // Add task as a free task belief
+// @reveive_task_assignment_single_block
+// +task(Name, Deadline, R, Params) : 
+//     (.length(Params) == 1) & 
+//     .member(req(X, Y, Type), Params) <-
+//     +free_task(Name, Deadline, R, X, Y, Type).
 
 +step(Num) <-
 	-+stepCount(Num);
