@@ -55,7 +55,7 @@ failed_attempt(0).
 	}.
 
 +!process_tasks <-  
-    .findall(free_task(Name0, Deadline0, R0, X0, Y0, Type0), 
+    .findall([Name0, Deadline0, R0, X0, Y0, Type0], 
 			(task(Name0, Deadline0, R0, Params) & 
 			 (.length(Params) == 1) &
 			 .member(req(X0, Y0, Type0), Params)), 
@@ -65,10 +65,14 @@ failed_attempt(0).
 +!iterate_tasks([]) <-  
     true.
 
-+!iterate_tasks(TaskList) <-  
-	for ( .member(free_task(Name0, Deadline0, R0, X0, Y0, Type0), TaskList)) {
-		+free_task(Name0, Deadline0, R0, X0, Y0, Type0);
-	}.
++!iterate_tasks([[Name0, Deadline0, R0, X0, Y0, Type0] | Rest]) <- 
+	+free_task(Name0, Deadline0, R0, X0, Y0, Type0);
+    !iterate_tasks(Rest).
+
+// +!iterate_tasks(TaskList) <-  
+// 	for ( .member(free_task(Name0, Deadline0, R0, X0, Y0, Type0), TaskList)) {
+// 		+free_task(Name0, Deadline0, R0, X0, Y0, Type0);
+// 	}.
 	
 
 // Process all tasks with free task beliefs, make sure no task is left out
@@ -133,6 +137,16 @@ failed_attempt(0).
 			!failure_handler(Act, Res, Par);
 		}
 	else {
+		if ((Res == success)) {
+			if (Act == attach) {
+				?attached(Count);
+				-+attached(Count+1);
+			}
+			elif (Act == submit) {
+				?attached(Count);
+				-+attached(Count-1);
+			}
+		}
 		-+failed_attempt(0);
 		!decision_maker;
 	}.

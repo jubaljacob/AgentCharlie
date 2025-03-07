@@ -29,7 +29,7 @@
     State == explore & 
     location(entity,_,X_ag,Y_ag) &
     (math.abs(X_ag) >= 1 | math.abs(Y_ag) >= 1) &
-    aattached(Blocks) & 
+    attached(Blocks) & 
     Blocks > 0 <- 
     .print("State3");
 
@@ -39,7 +39,7 @@
 // Look for nearest goal when agent carries block
 +!decision_maker : state(State) & 
     State == explore &
-    location(goal, _Type, Xg, Yg) & 
+    location(goal, null, Xg, Yg) & 
     attached(Blocks) & 
     Blocks > 0 <- 
     .print("State4");
@@ -52,7 +52,7 @@
 // Random exploration decision maker
 +!decision_maker : state(State) &
     State == explore <-
-    .print("State5");
+    // .print("State5");
 
     !move_random(Dir);
     !action(move, Dir).
@@ -61,7 +61,7 @@
 +!decision_maker : state(State) &
     State == contigency & 
     contigency(PrevState, RemainingSteps) <- 
-    .print("State6");
+    // .print("State6");
 
     ?lastActionParams([Direction])[_];
 
@@ -84,7 +84,7 @@
     .print("State7");
 
     // .print("Sensed ", Xt, ", ", Yt);
-    .print("Target ", X, ", ", Y);
+    // .print("Target ", X, ", ", Y);
     // DispenserX = math.abs(X);
     // DispenserY = math.abs(Y);
 
@@ -96,7 +96,6 @@
     }
     // When agent is adjacent to dispenser
     if ( (math.abs(X) == 1 & Y == 0) | (X == 0 & math.abs(Y) == 1) ) {
-        .print("Adjacent");
         -+state(request_block);
         !decision_maker;
     }
@@ -108,7 +107,6 @@
 
         // ?move_axis(Axis);
         if (math.abs(X) > 0) {
-            .print("Move x");
             if (X > 0) { 
                 NewX = X - 1;
                 -+target_dispenser(NewX,Y);
@@ -121,7 +119,6 @@
             }
         }
         elif (math.abs(Y) > 0) {
-            .print("Move y");
             if (Y > 0) {
                 NewY = Y - 1;
                 -+target_dispenser(X,NewY);
@@ -187,16 +184,16 @@
 // Attach block after request
 +!decision_maker : state(State) & 
     State == attach_block &
-    dir(Direction) <- 
+    dir(Direction) & 
+    attached(Count) <- 
     .print("State9");
 
     // Remove direction belief and move to next state
     -dir(Direction);
     -+state(request_rotate);
     
-    // Update attachment count
-    ?attached(Count);
-    -+attached(Count+1);
+    // // Update attachment count
+    // -+attached(Count+1);
 
     // Perform attach action based on direction
     if (Direction == n) {
@@ -237,32 +234,28 @@
     target_goal(X, Y) <- 
     .print("State11");
 
-    GoalX = math.abs(X);
-    GoalY = math.abs(Y);
-
     // When agent is on the goal
-    if ( (GoalX == 0 & GoalY == 0) ) {
+    if ( (X == 0 & Y == 0) ) {
         -+state(submit_goal);
         !decision_maker;
     }
     else {
-        ?move_axis(Axis);
-        if (math.abs(X) > 0 & Axis == x) {
+        if (math.abs(X) > 0) {
             if (X > 0) { 
                 -+target_goal(X-1,Y);
                 !action(move, e);
             }
-            else {
+            elif (X < 0) {
                 -+target_goal(X+1,Y);
                 !action(move, w);
             }
         }
-        elif (math.abs(Y) > 0 & Axis == y) {
+        elif (math.abs(Y) > 0) {
             if (Y > 0) {
                 -+target_goal(X,Y-1);
                 !action(move, s);
             }
-            else {
+            elif (Y < 0) {
                 -+target_goal(X,Y+1);
                 !action(move, n);
             }
@@ -276,20 +269,22 @@
     attached(Count) & 
     Count > 0 &
     // free_task(Task, _, _, X, Y, Type) &
-    target_goal(X, Y) <- 
+    target_goal(Xg, Yg) <- 
     .print("State12");
 
-    !find_nearest_goal(0, 0, Xg, Yg);
+    // !find_nearest_goal(0, 0, Xg, Yg);
 
     // Find the blocks that the agent has
     !find_agent_block(Dirs, _BlockNumber);
     // Find Task that matches the current hold direction
     !find_task_block_dir(Dirs, Task);
+
+    // .print("Goal: ", Xg, Yg);
     if (Xg == 0 & Yg == 0) {
         // When agent is on goal and has an task that fits the direction of the block, submit. Otherwise, rotate clockwise
         if(not(Task == null)) {
-            // Update attachment count, remove task and submit
-            -+attached(Count-1);
+            .print("Submitting Task");
+            // Remove task and submit
             -free_task(Task,_,_,_,_,_);
             !action(submit, Task);
         }

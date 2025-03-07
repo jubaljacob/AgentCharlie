@@ -71,6 +71,13 @@
     -dir(_);
     !decision_maker.
 
+// If request failed, agent move 5 steps away, giving up the dispenser
++!failure_handler(request, failed_target, _Param) <- 
+    -dir(_);
+    -target_dispenser(_X,_Y);
+    -+state(contigency);
+    !call_for_backup(explore).
+
 // If submit failed because no task is invalid, search again for task and submit
 +!failire_handler(submit, failed_target, _Param) <- 
     -+state(submit_goal);
