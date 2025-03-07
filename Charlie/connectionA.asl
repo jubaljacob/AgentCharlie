@@ -117,7 +117,7 @@ failed_attempt(0).
 		}
 	else {
 		-+failed_attempt(0);
-		!decide_action;
+		!decision_maker;
 	}.
 
 	// mypackage.MyAction(1, K, S, C, A, Result, Act);

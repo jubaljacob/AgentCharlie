@@ -4,6 +4,7 @@
     attached(Blocks) & 
     Blocks == 0 &
     location(dispenser, _Type, _, _) <-
+    .print("State1");
 
     !find_nearest_dispenser(0, 0, Xd, Yd, _Type);
     +target_dispenser(_Type, Xd, Yd);
@@ -18,6 +19,7 @@
     (math.abs(X_ag-Xg) >= 1 | math.abs(Y_ag-Yg) >= 1) &
     attached(Blocks) & 
     Blocks > 0 <- 
+    .print("State2");
 
     // If agent found agent 1 distance away from agent/goal, activate contigency plan
     !call_for_backup(explore).
@@ -29,6 +31,7 @@
     (math.abs(X_ag) >= 1 | math.abs(Y_ag) >= 1) &
     aattached(Blocks) & 
     Blocks > 0 <- 
+    .print("State3");
 
     // If agent found agent 1 distance away from agent/goal, activate contigency plan
     !call_for_backup(explore).
@@ -39,6 +42,7 @@
     location(goal, _Type, X, Y) & 
     attached(Blocks) & 
     Blocks > 0 <- 
+    .print("State4");
 
     !find_nearest_goal(0, 0, Xg, Yg);
     +target_goal(Xg, Yg);
@@ -48,6 +52,7 @@
 // Random exploration decision maker
 +!decision_maker : state(State) &
     State == explore <-
+    .print("State5");
 
     .random(RandomNumber) & random_dir([n,s,e,w],RandomNumber,Dir);
     !action(move, Dir).
@@ -56,6 +61,7 @@
 +!decision_maker : state(State) &
     State == contigency & 
     contigency(PrevState, RemainingSteps) <- 
+    .print("State6");
 
     ?lastActionParams([Direction])[_];
 
@@ -75,6 +81,7 @@
 +!decision_maker : state(State) & 
     State == move_to_dispenser &
     target_dispenser(_Type, X, Y) <- 
+    .print("State7");
 
     DispenserX = math.abs(X);
     DispenserY = math.abs(Y);
@@ -123,6 +130,7 @@
 +!decision_maker : state(State) & 
     State == request_block &
     target_dispenser(Type, X, Y) <- 
+    .print("State8");
     
     // Check if agent is adjacent to dispenser
     if ((math.abs(X) == 1 & Y == 0) | (math.abs(Y) == 1 & X == 0)) {
@@ -158,6 +166,7 @@
 +!decision_maker : state(State) & 
     State == attach_block &
     dir(Direction) <- 
+    .print("State9");
 
     // Remove direction belief and move to next state
     -dir(Direction);
@@ -185,6 +194,7 @@
 +!decision_maker : state(State) & 
     State == request_rotate &
     rotate_dir(Rotation) <- 
+    .print("State10");
     
     ?attached(Count);
     // Check if we've attached enough blocks
@@ -202,6 +212,7 @@
 +!decision_maker : state(State) & 
     State == move_to_goal &
     target_goal(X, Y) <- 
+    .print("State11");
 
     GoalX = math.abs(X);
     GoalY = math.abs(Y);
@@ -243,6 +254,7 @@
     Count > 0 &
     // free_task(Task, _, _, X, Y, Type) &
     target_goal(X, Y) <- 
+    .print("State12");
 
     !find_nearest_goal(0, 0, Xg, Yg);
 
