@@ -14,7 +14,7 @@
         !rotate(Param);
     }
     elif (Action == submit) {
-        !rotate(Param);
+        !submit(Param);
     }.
 
 +!move(Dir) <- 

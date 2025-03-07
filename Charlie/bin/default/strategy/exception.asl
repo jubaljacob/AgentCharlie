@@ -110,5 +110,6 @@
     -+state(contigency);
     +contigency(PrevState, 5);
 
-    .random(RandomNumber) & random_dir([n,s,e,w],RandomNumber,Dir);
+    .random(RandomNumber);
+    random_dir([n,s,e,w],RandomNumber,Dir);
     !action(move, Dir).

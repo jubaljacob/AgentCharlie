@@ -68,7 +68,7 @@ failed_attempt(0).
 		 stepCount(Steps) & 
 		 Steps >= Deadline1),
 		ExpiredTasks);
-	!iterate_expired_tasks.
+	!iterate_expired_tasks(ExpiredTasks).
 
 +!iterate_tasks([]) <-  
     true.
@@ -77,7 +77,7 @@ failed_attempt(0).
 	true.
 
 // Add all leftout tasks and remove all expired tasks
-+!iterate_tasks(TaskList) <-  
++!iterate_expired_tasks(TaskList) <-  
 	for ( .member(free_task(Name, Deadline, R, X, Y, Type), TaskList) ) {
 		+free_task(Name, Deadline, R, X, Y, Type);
 	}.
@@ -97,11 +97,17 @@ failed_attempt(0).
 +step(Num) <-
 	-+stepCount(Num);
     !monitor_percepts.
-	
-+actionID(X) : true <-
+
+// Xheck action status
++!check_prev_action_status(Act, Res, Par) <- 
 	?lastAction(Act);
 	?lastActionResult(Res);
-    ?lastActionParams([Par])[_];
+    ?lastActionParams([Par])[_].
+
+-!check_prev_action_status(Act, Res, Par) <- Act = null; Res=null; Par=null.
+
++actionID(X) : true <-
+	!check_prev_action_status(Act, Res, Par);
 
 	// If previous action failed, look for exception handler, otherwise go for decision maker
 	if ((Res == failed) | (Res == failed_target) | (Res == failed_blocked) | 
@@ -111,7 +117,7 @@ failed_attempt(0).
 		}
 	else {
 		-+failed_attempt(0);
-		!decide_action;
+		!decision_maker;
 	}.
 
 	// mypackage.MyAction(1, K, S, C, A, Result, Act);
