@@ -117,12 +117,23 @@
 +!decision_maker : state(State) & 
     State == submit_goal &
     block(Type) &
-    free_task(Name, _, _, X, Y, Type) &
+    free_task(Task, _, _, X, Y, Type) &
     target_goal(X, Y) <- 
 
     !find_nearest_goal(0, 0, Xg, Yg);
+
+    // Find the blocks that the agent has
+    !find_agent_block(Dirs, _BlockNumber);
+    // Find Task that matches the current hold direction
+    !find_task_block_dir(Dirs, Task);
     if (Xg == 0 && Yg == 0) {
-        
+        // When agent is on goal and has an task that fits the direction of the block, submit. Otherwise, rotate clockwise
+        if(not(Task == null)) {
+            !action(submit, Task);
+        }
+        else {
+            !action(rotate, cw);
+        }
     } 
     else {
         // When agent is not on top of the goal, that says if agent is on top, nearest should be 0,0
