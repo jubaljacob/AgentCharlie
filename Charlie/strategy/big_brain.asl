@@ -72,6 +72,94 @@
     }.
 
 // State 2 -4
+// Request block from dispenser
++!decision_maker : state(State) & 
+    State == request_block &
+    target_dispenser(Type, X, Y) <- 
+    
+    // Check if agent is adjacent to dispenser
+    if ((math.abs(X) == 1 & Y == 0) | (math.abs(Y) == 1 & X == 0)) {
+        // Determine direction to request block based on dispenser position
+        if (X == -1 & Y == 0) {
+            +dir(e);  // East
+            !action(request, e);
+        } 
+        elif (X == 1 & Y == .0) {
+            +dir(w);  // West
+            !action(request, w);
+        } 
+        elif (X == 0 & Y == 1) {
+            +dir(s);  // South
+            !action(request, s);
+        } 
+        elif (X == 0 & Y == -1) {
+            +dir(n);  // North
+            !action(request, n);
+        }
+        -+state(attach_block);
+        !decision_maker;
+    }
+    else {
+        // If not adjacent to dispenser, go back to finding dispenser
+        -+state(move_to_dispenser);
+        !decision_maker;
+    }.
+
+// Attach block after request
++!decision_maker : state(State) & 
+    State == attach_block &
+    dir(Direction) <- 
+    
+    // Perform attach action based on direction
+    if (Direction == n) {
+        !action(attach, n);
+    } 
+    elif (Direction == s) {
+        !action(attach, s);
+    } 
+    elif (Direction == e) {
+        !action(attach, e);
+    } 
+    elif (Direction == w) {
+        !action(attach, w);
+    }
+    
+    // Remove direction belief
+    -dir(Direction);
+    -+state(rotate_block);
+    !decision_maker.
+
+// Rotate block after attaching
++!decision_maker : state(State) & 
+    State == rotate_block &
+    rotation(Rotation) <- 
+    
+    // Rotate clockwise or counter-clockwise 
+    if (not Rotation) {
+        !action(rotate, cw);
+    } 
+    else {
+        !action(rotate, ccw);
+    }
+    
+    // Update attachment count
+    ?attached(Count);
+    -+attached(Count+1);
+    
+    // Check if we've attached enough blocks
+    if (Count+1 > 3) {
+        -+state(move_to_goal);
+    } 
+    else {
+        -+state(request_block);
+    }
+    
+    !decision_maker.
+
+// Initialize rotation and attached count if they don't exist
++!init_block_beliefs : true <-
+    +rotation(false);
+    +attached(0).
 
 
 
