@@ -42,7 +42,12 @@
     }
     // Agent moves X then moves Y to dispenser
     else {
-        if (math.abs(X) > 0) {
+        if (x == 0 | y == 0) {
+            !convert_move_axis;
+        }
+
+        ?move_axis(Axis);
+        if (math.abs(X) > 0 & Axis == x) {
             if (X > 0) { 
                 -+target_dispenser(X-1,Y);
                 !action(move, e);
@@ -52,7 +57,7 @@
                 !action(move, w);
             }
         }
-        elif (math.abs(Y) > 0) {
+        elif (math.abs(Y) > 0 && Axis == y) {
             if (Y > 0) {
                 -+target_dispenser(X,Y-1);
                 !action(move, s);
@@ -177,7 +182,8 @@
         !decision_maker;
     }
     else {
-        if (math.abs(X) > 0) {
+        ?move_axis(Axis);
+        if (math.abs(X) > 0 & Axis == x) {
             if (X > 0) { 
                 -+target_dispenser(X-1,Y);
                 !action(move, e);
@@ -187,7 +193,7 @@
                 !action(move, w);
             }
         }
-        elif (math.abs(Y) > 0) {
+        elif (math.abs(Y) > 0 Axis == y) {
             if (Y > 0) {
                 -+target_dispenser(X,Y-1);
                 !action(move, s);
@@ -220,7 +226,8 @@
             !action(submit, Task);
         }
         else {
-            !action(rotate, cw);
+            ?rotate_dir(RotateDir);
+            !action(rotate, RotateDir);
         }
     } 
     else {
