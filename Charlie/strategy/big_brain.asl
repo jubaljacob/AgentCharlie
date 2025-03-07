@@ -131,6 +131,8 @@
     State == request_block &
     target_dispenser(Type, X, Y) <- 
     .print("State8");
+
+    -target_dispenser(X,Y);
     
     // Check if agent is adjacent to dispenser
     if ((math.abs(X) == 1 & Y == 0) | (math.abs(Y) == 1 & X == 0)) {
