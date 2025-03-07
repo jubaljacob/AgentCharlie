@@ -3,26 +3,27 @@
     State == explore & 
     attached(Blocks) & 
     Blocks == 0 &
-    location(dispenser, _Type, Xd, Yd) <-
+    location(dispenser, Type, Xd, Yd) <-
     .print("State1");
 
     // !find_nearest_dispenser(0, 0, Xd, Yd, _Type);
+    +targetType(Type);
     +target_dispenser(Xd, Yd);
     -+state(move_to_dispenser);
     !decision_maker.
 
 // Look for nearest goal with blocks carried, but if found other agent near goal, move away
-+!decision_maker : state(State) &
-    State == explore & 
-    location(entity,_,X_ag,Y_ag) &
-    location(goal,_,Xg,Yg) &
-    (math.abs(X_ag-Xg) >= 1 | math.abs(Y_ag-Yg) >= 1) &
-    attached(Blocks) & 
-    Blocks > 0 <- 
-    .print("State2");
+// +!decision_maker : state(State) &
+//     State == explore & 
+//     (location(entity,_,X_ag,Y_ag) & (math.abs(X_ag) + math.abs(Y_ag) < 3) )&
+//     location(goal,_,Xg,Yg) &
+//     (math.abs(X_ag-Xg) >= 1 | math.abs(Y_ag-Yg) >= 1) &
+//     attached(Blocks) & 
+//     Blocks > 0 <- 
+//     .print("State2");
 
-    // If agent found agent 1 distance away from agent/goal, activate contigency plan
-    !call_for_backup(explore).
+//     // If agent found agent 1 distance away from agent/goal, activate contigency plan
+//     !call_for_backup(explore).
 
 // Look for nearest goal with blocks carried, but if other agent is near me, move away
 +!decision_maker : state(State) &
@@ -88,7 +89,7 @@
     // DispenserX = math.abs(X);
     // DispenserY = math.abs(Y);
 
-    if (x == 0 & y == 0) {
+    if (X == 0 & Y == 0) {
         // If the agent is on top of dispenser
         NewY = Y + 1;
         -+target_dispenser(X,NewY);
@@ -234,33 +235,101 @@
     target_goal(X, Y) <- 
     .print("State11");
 
-    // When agent is on the goal
-    if ( (X == 0 & Y == 0) ) {
+    if (X == 0 & Y == 0) {
         -+state(submit_goal);
         !decision_maker;
     }
+    // When agent is adjacent to dispenser
+    if ( (math.abs(X) == 1 & Y == 0) | (X == 0 & math.abs(Y) == 1) ) {
+        if (math.abs(X) == 1) {
+            if (X == 1) {
+                NewX = X - 1;
+                -+target_goal(NewX,Y);
+                !action(move, e);
+            }
+            elif (X == -1) {
+                NewX = X + 1;
+                -+target_goal(NewX,Y);
+                !action(move, w);
+            }
+        }
+        if (math.abs(Y) == 1) {
+            if (Y == 1) {
+                NewY = Y - 1;
+                -+target_goal(X,NewY);
+                !action(move, s);
+            }
+            elif (Y == -1) {
+                NewY = Y + 1;
+                -+target_goal(X,NewY);
+                !action(move, n);
+            }
+        }
+    }
+    // Agent moves X then moves Y to goal
     else {
         if (math.abs(X) > 0) {
             if (X > 0) { 
-                -+target_goal(X-1,Y);
+                NewX = X - 1;
+                -+target_goal(NewX,Y);
                 !action(move, e);
             }
-            elif (X < 0) {
-                -+target_goal(X+1,Y);
+            elif(X < 0) {
+                NewX = X + 1;
+                -+target_goal(NewX,Y);
                 !action(move, w);
             }
         }
         elif (math.abs(Y) > 0) {
             if (Y > 0) {
-                -+target_goal(X,Y-1);
+                NewY = Y - 1;
+                -+target_goal(X,NewY);
                 !action(move, s);
             }
             elif (Y < 0) {
-                -+target_goal(X,Y+1);
+                NewY = Y + 1;
+                -+target_goal(X,NewY);
                 !action(move, n);
             }
         }
+        else {
+            // If the agent is on top of dispenser
+            -+state(submit_goal);
+            !decision_maker;
+        }
     }.
+
+    // // When agent is on the goal
+    // if ( (X == 0 & Y == 0) ) {
+    //     -+state(submit_goal);
+    //     !decision_maker;
+    // }
+    // else {
+    //     if (math.abs(X) > 0) {
+    //         if (X > 0) { 
+    //             NewX = X - 1;
+    //             -+target_goal(NewX,Y);
+    //             !action(move, e);
+    //         }
+    //         elif (X < 0) {
+    //             NewX = X + 1;
+    //             -+target_goal(NewX,Y);
+    //             !action(move, w);
+    //         }
+    //     }
+    //     elif (math.abs(Y) > 0) {
+    //         if (Y > 0) {
+    //             NewY = Y - 1;
+    //             -+target_goal(X,NewY);
+    //             !action(move, s);
+    //         }
+    //         elif (Y < 0) {
+    //             NewY = Y + 1;
+    //             -+target_goal(X,NewY);
+    //             !action(move, n);
+    //         }
+    //     }
+    // }.
 
 // Agent search for goal position
 +!decision_maker : state(State) & 
@@ -268,33 +337,37 @@
     // block(Type) &
     attached(Count) & 
     Count > 0 &
-    // free_task(Task, _, _, X, Y, Type) &
+    targetType(Type) &
+    free_task(Task, _, _, _X, _Y, Type) &
     target_goal(Xg, Yg) <- 
     .print("State12");
 
     // !find_nearest_goal(0, 0, Xg, Yg);
 
-    // Find the blocks that the agent has
-    !find_agent_block(Dirs, _BlockNumber);
-    // Find Task that matches the current hold direction
-    !find_task_block_dir(Dirs, Task);
+    // // Find the blocks that the agent has
+    // !find_agent_block(Dirs, _BlockNumber);
+    // // Find Task that matches the current hold direction
+    // !find_task_block_dir(Dirs, Task);
+    
 
     // .print("Goal: ", Xg, Yg);
     if (Xg == 0 & Yg == 0) {
-        // When agent is on goal and has an task that fits the direction of the block, submit. Otherwise, rotate clockwise
-        if(not(Task == null)) {
-            .print("Submitting Task");
-            // Remove task and submit
-            -free_task(Task,_,_,_,_,_);
-            !action(submit, Task);
-        }
-        else {
-            ?rotate_dir(RotateDir);
-            !action(rotate, RotateDir);
-        }
+        !action(submit, Task);
+        // // When agent is on goal and has an task that fits the direction of the block, submit. Otherwise, rotate clockwise
+        // if(not(Task == null)) {
+        //     .print("Submitting Task");
+        //     // Remove task and submit
+        //     // -free_task(Task,_,_,_,_,_);
+        //     !action(submit, Task);
+        // }
+        // else {
+        //     ?rotate_dir(RotateDir);
+        //     !action(rotate, RotateDir);
+        // }
     } 
     else {
         // When agent is not on top of the goal, that says if agent is on top, nearest should be 0,0
         // Change the state to explore to trigger the agent to move_to_goal when agent carries a block
+        -targetType(Type);
         -+state(explore);
     }.

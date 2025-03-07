@@ -79,9 +79,12 @@
     !call_for_backup(explore).
 
 // If submit failed because no task is invalid, search again for task and submit
-+!failire_handler(submit, failed_target, _Param) <- 
+// +!failire_handler(submit, failed_target, _Param) <- 
+//     -+state(submit_goal);
+//     !decision_maker.
++!failure_handler(submit, _Failure, _Param) : rotate_dir(RotateDir) <-
     -+state(submit_goal);
-    !decision_maker.
+    !action(rotate, RotateDir).
 
 // If attach fails, because nothing to attach, request a block again [failed_target]
 +!failure_handler(attach, failed_target, _Param) <-
