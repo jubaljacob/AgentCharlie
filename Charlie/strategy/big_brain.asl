@@ -139,23 +139,27 @@
         // Determine direction to request block based on dispenser position
         if (X == -1 & Y == 0) {
             +dir(e);  // East
-            -+state(attach_block);
             !action(request, e);
+            -+state(attach_block);
+            
         } 
         elif (X == 1 & Y == 0) {
             +dir(w);  // West
-            -+state(attach_block);
             !action(request, w);
+            -+state(attach_block);
+            
         } 
         elif (X == 0 & Y == 1) {
             +dir(s);  // South
-            -+state(attach_block);
             !action(request, s);
+            -+state(attach_block);
+            
         } 
         elif (X == 0 & Y == -1) {
             +dir(n);  // North
-            -+state(attach_block);
             !action(request, n);
+            -+state(attach_block);
+            
         }
     }
     else {
