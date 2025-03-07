@@ -101,7 +101,7 @@
                 !action(move, w);
             }
         }
-        elif (math.abs(Y) > 0 && Axis == y) {
+        elif (math.abs(Y) > 0 & Axis = y) {
             if (Y > 0) {
                 -+target_dispenser(X,Y-1);
                 !action(move, s);
@@ -151,8 +151,8 @@
     else {
         // If not adjacent to dispenser, go back to finding dispenser
         -+state(move_to_dispenser);
-        !decision_maker.
-    }
+        !decision_maker;
+    }.
 
 // Attach block after request
 +!decision_maker : state(State) & 
@@ -223,7 +223,7 @@
                 !action(move, w);
             }
         }
-        elif (math.abs(Y) > 0 Axis == y) {
+        elif (math.abs(Y) > 0 & Axis == y) {
             if (Y > 0) {
                 -+target_dispenser(X,Y-1);
                 !action(move, s);
@@ -250,7 +250,7 @@
     !find_agent_block(Dirs, _BlockNumber);
     // Find Task that matches the current hold direction
     !find_task_block_dir(Dirs, Task);
-    if (Xg == 0 && Yg == 0) {
+    if (Xg == 0 & Yg == 0) {
         // When agent is on goal and has an task that fits the direction of the block, submit. Otherwise, rotate clockwise
         if(not(Task == null)) {
             // Update attachment count, remove task and submit
