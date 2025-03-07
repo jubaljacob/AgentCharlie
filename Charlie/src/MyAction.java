@@ -28,6 +28,10 @@ public class MyAction extends DefaultInternalAction {
     int stepstaken = 0;
     int priorstate = 0;
     boolean rotation = false;
+    int failureCount = 0; // Track consecutive movement failures
+    int entityx = 0; // Track entity x position for avoidance
+    int entityy = 0; // Track entity y position for avoidance
+    
     @Override
     public Object execute(TransitionSystem ts, Unifier un, Term[] args) throws Exception {
         
@@ -36,9 +40,7 @@ public class MyAction extends DefaultInternalAction {
         
         
         if (function == 1) {
-
             
-
             int action = 0;
             String lastaction = args[6].toString();
             String lastresult = args[5].toString();
@@ -49,6 +51,11 @@ public class MyAction extends DefaultInternalAction {
                 } else if (rotation == false)  {
                     rotation = false;
                 }
+            }
+            
+            // Reset failure count on successful moves
+            if(lastaction.equals("move") && lastresult.equals("success")) {
+                failureCount = 0;
             }
             
             if (state == -1) {
@@ -177,8 +184,8 @@ public class MyAction extends DefaultInternalAction {
             } else if (state == 5) { 
                 int distancetoclosestgoal = 1000;
                 int timeforpickup = 0;
-                int entityx = 0;
-                int entityy = 0; 
+                entityx = 0; // Reset entity position tracking
+                entityy = 0;
                 int x = 0;
                 int y = 0;
                 boolean checkentity = false;
@@ -214,16 +221,17 @@ public class MyAction extends DefaultInternalAction {
                     state = 6;
                 }
 
+                // Improved entity avoidance logic
                 if(checkentity == true) { 
-                    if ((Math.abs(entityx - x) <= 1 && Math.abs(entityy - y) <= 1) && distancetoclosestgoal < 100) {
+                    // If entity is near the goal or near the agent itself, avoid and find another goal
+                    if (Math.abs(entityx) <= 3 && Math.abs(entityy) <= 3) {
+                        System.out.println("Agent detected nearby, avoiding and searching for another goal");
                         priorstate = 5;
-                        state = 20;
+                        state = 20; // Go to avoidance state
                         action = 0;
                     }
                 }
 
-
-                
             } else if (state == 6) {
                 boolean targetReached = (Math.abs(targetX) == 0 && targetY == 0);
                 //System.out.println("closest Dispenser at X:" + targetX + " Y:" + targetY);
@@ -270,11 +278,7 @@ public class MyAction extends DefaultInternalAction {
                         state = 5; // Arrived at correct position
                         action = 0; 
                     }
-
-                    
                 }
-
-
                 
             } else if (state == 7) {  
                 boolean checkentity = false; 
@@ -305,8 +309,6 @@ public class MyAction extends DefaultInternalAction {
                         }
                     } 
                 }
-                
-
                 
             } else if (state == 8) {
                 for(int i = 0; i < tasks.size(); i++) {
@@ -388,49 +390,85 @@ public class MyAction extends DefaultInternalAction {
                     action = 0;
                     attached = 0;
                 }
-            }   else if (state == 20) { 
-                if(direction == 0){
-                    Random random = new Random();
-                    direction = random.nextInt(4) + 1;
+            } else if (state == 20) { 
+                // Improved avoidance state - more intelligent movement away from other agents
+                if(direction == 0) {
+                    // Choose direction away from the entity
+                    if (Math.abs(entityx) > Math.abs(entityy)) {
+                        // Entity is more in east-west direction
+                        direction = entityx > 0 ? 3 : 4; // Move west if entity is east, and vice versa
+                    } else {
+                        // Entity is more in north-south direction
+                        direction = entityy > 0 ? 1 : 2; // Move north if entity is south, and vice versa
+                    }
+                    
+                    // If no entity detected or not clear which way to go, pick random direction
+                    if (entityx == 0 && entityy == 0) {
+                        Random random = new Random();
+                        direction = random.nextInt(4) + 1;
+                    }
                 } else if (direction == 1) {
-                    action = 1;
+                    action = 1; // North
                     stepstaken = stepstaken + 1;
                 } else if (direction == 2) {
-                    action = 2;
+                    action = 2; // South
                     stepstaken = stepstaken + 1;
                 } else if (direction == 3) {
-                    action = 3;
+                    action = 3; // West
                     stepstaken = stepstaken + 1;
                 } else if (direction == 4) {
-                    action = 4;
+                    action = 4; // East
                     stepstaken = stepstaken + 1;
                 } 
 
-                if (stepstaken > 5) {
+                // After moving away, try to find a new goal
+                if (stepstaken > 3) {
                     action = 0;
                     stepstaken = 0;
-                    if(priorstate == 3){
-                        state = 0;
+                    direction = 0;
+                    if (priorstate == 3) {
+                        state = 0; // Return to finding dispensers
                     } else if (priorstate == 5) {
-                        state = 5;
+                        state = 5; // Return to finding goals
+                    } else {
+                        state = 0; // Default to finding dispensers
                     }
                 }
             }
 
-            if(lastaction.equals("move") && (lastresult.equals("failed_path") || lastresult.equals("failed_forbidden"))){
-                if(action == 1){ 
-                    action = 3;
-                } else if (action == 2) {
-                    action = 4;
-                } else if (action == 3) {
-                    action = 1;
-                } else if (action == 4) {
-                    action = 2;
+            // Enhanced obstacle avoidance
+            if(lastaction.equals("move") && (lastresult.equals("failed_path") || lastresult.equals("failed_forbidden"))) {
+                System.out.println("Movement failed, attempting to navigate around obstacle");
+                
+                // Increment failure counter
+                failureCount++;
+                
+                // Remember the failed direction to avoid repeated failures
+                int failedDirection = action;
+                
+                // Try a different direction - more intelligent than just reversing
+                if (failedDirection == 1 || failedDirection == 2) {
+                    // If north/south failed, try east/west
+                    Random random = new Random();
+                    action = random.nextBoolean() ? 3 : 4;
+                } else if (failedDirection == 3 || failedDirection == 4) {
+                    // If east/west failed, try north/south
+                    Random random = new Random();
+                    action = random.nextBoolean() ? 1 : 2;
                 }
-            } 
+                
+                // If we've had multiple consecutive failures, try a more drastic approach
+                if (failureCount > 2) {
+                    // After multiple failures, completely change strategy
+                    state = 20; // Go to avoidance state
+                    direction = 0; // Will choose a new direction
+                    stepstaken = 0;
+                    failureCount = 0;
+                    System.out.println("Multiple movement failures, changing strategy");
+                }
+            }
 
-    
-
+            // Additional agent avoidance check for state 3 (before attaching blocks)
             if(state == 3) {
                 boolean shouldntattach = false;
                 int x = 0;
@@ -446,7 +484,6 @@ public class MyAction extends DefaultInternalAction {
                         if(sum < 3 && sum > 0){
                             shouldntattach = true;
                         }
-                        
                     }
                 }
                 if (shouldntattach == true) {
@@ -455,9 +492,6 @@ public class MyAction extends DefaultInternalAction {
                     priorstate = 3;
                 }
             }
-
-            
-            
             
             tasks.clear();
             map.clear();
