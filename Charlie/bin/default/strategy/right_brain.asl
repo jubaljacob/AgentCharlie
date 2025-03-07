@@ -29,6 +29,7 @@
     );
     .length(Dirs, BlockNumber).
 
+// Will look got task with block direction and type
 @find_task_with_block_dir
 +!find_task_block_dir(BlockDirs, Task) <-
     .findall(
