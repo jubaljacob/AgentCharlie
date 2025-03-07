@@ -1,3 +1,14 @@
+
+{ include("strategy/action.asl") }
+{ include("strategy/big_brain.asl") }
+{ include("strategy/right_brain.asl") }
+{ include("strategy/exception.asl") }
+{ include("strategy/utils.asl") }
+
+
+
+
+
 /* Initial beliefs and rules */
 random_dir(DirList,RandomNumber,Dir) :- (RandomNumber <= 0.25 & .nth(0,DirList,Dir)) | (RandomNumber <= 0.5 & .nth(1,DirList,Dir)) | (RandomNumber <= 0.75 & .nth(2,DirList,Dir)) | (.nth(3,DirList,Dir)).
 
