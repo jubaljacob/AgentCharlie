@@ -54,8 +54,7 @@
     State == explore <-
     .print("State5");
 
-    .random(RandomNumber);
-    random_dir([n,s,e,w],RandomNumber,Dir);
+    !move_random(Dir);
     !action(move, Dir).
 
 // Contigency move 5 steps away, 1 step already taken in exception handler

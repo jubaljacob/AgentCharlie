@@ -109,7 +109,6 @@
 +!call_for_backup(PrevState) <- 
     -+state(contigency);
     +contigency(PrevState, 5);
-
-    .random(RandomNumber);
-    random_dir([n,s,e,w],RandomNumber,Dir);
+    
+    !move_random(Dir);
     !action(move, Dir).
