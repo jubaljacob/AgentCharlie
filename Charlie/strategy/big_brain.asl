@@ -1,14 +1,7 @@
-// Random exploration decision maker
-+!decision_maker : state(State) &
-    State == explore <-
-
-    .random(RandomNumber) & random_dir([n,s,e,w],RandomNumber,Dir);
-    !action(move, Dir).
-
 // Look for nearest dispenser
 +!decision_maker : state(State) &
     State == explore & 
-    not(block(_)) &
+    not(attached(_)) &
     location(dispenser, _Type, _, _) <-
 
     !find_nearest_dispenser(0, 0, Xd, Yd, _Type);
@@ -19,13 +12,20 @@
 // Look for nearest goal when agent carries block
 +!decision_maker : state(State) & 
     State == explore &
-    block(_) &
-    target_dispenser(_Type, X, Y) <- 
+    attached(_) &
+    location(goal, _Type, X, Y) <- 
 
     !find_nearest_goal(0, 0, Xg, Yg);
     +target_goal(Xg, Yg);
     -+state(move_to_goal);
     !decision_maker.
+
+// Random exploration decision maker
++!decision_maker : state(State) &
+    State == explore <-
+
+    .random(RandomNumber) & random_dir([n,s,e,w],RandomNumber,Dir);
+    !action(move, Dir).
 
 // Move to nearest dispenser
 +!decision_maker : state(State) & 
@@ -87,39 +87,44 @@
         // Determine direction to request block based on dispenser position
         if (X == -1 & Y == 0) {
             +dir(e);  // East
-            !action(request, e);
             -+state(attach_block);
+            !action(request, e);
         } 
         elif (X == 1 & Y == 0) {
             +dir(w);  // West
-            !action(request, w);
             -+state(attach_block);
+            !action(request, w);
         } 
         elif (X == 0 & Y == 1) {
             +dir(s);  // South
-            !action(request, s);
             -+state(attach_block);
+            !action(request, s);
         } 
         elif (X == 0 & Y == -1) {
             +dir(n);  // North
-            !action(request, n);
             -+state(attach_block);
-        }
-        else {
-            -+state(move_to_dispenser);
+            !action(request, n);
         }
     }
     else {
         // If not adjacent to dispenser, go back to finding dispenser
         -+state(move_to_dispenser);
+        !decision_maker.
     }
-    !decision_maker.
 
 // Attach block after request
 +!decision_maker : state(State) & 
     State == attach_block &
     dir(Direction) <- 
+
+    // Remove direction belief and move to next state
+    -dir(Direction);
+    -+state(request_rotate);
     
+    // Update attachment count
+    ?attached(Count);
+    -+attached(Count+1);
+
     // Perform attach action based on direction
     if (Direction == n) {
         !action(attach, n);
@@ -132,46 +137,24 @@
     } 
     elif (Direction == w) {
         !action(attach, w);
-    }
-    
-    // Remove direction belief and move to next state
-    -dir(Direction);
-    -+state(rotate_block);
-    !decision_maker.
+    }.
 
 // Rotate block after attaching
 +!decision_maker : state(State) & 
-    State == rotate_block &
+    State == request_rotate &
     rotation(Rotation) <- 
     
-    // Rotate clockwise or counter-clockwise 
-    if (not Rotation) {
-        !action(rotate, cw);
-    } 
-    else {
-        !action(rotate, ccw);
-    }
-    
-    // Update attachment count
     ?attached(Count);
-    -+attached(Count+1);
-    
     // Check if we've attached enough blocks
-    if (Count+1 > 3) {
-        -+state(move_to_goal);
+    if (Count > 3) {
+        -+state(explore);
+        !decision_maker;
     } 
     else {
         -+state(request_block);
-    }
-    
-    !decision_maker.
-
-// Initialize rotation and attached count if they don't exist
-+!init_block_beliefs : true <-
-    +rotation(false);
-    +attached(0).
-
-
+        // Rotate clockwise or counter-clockwise 
+        !action(rotate, Rotation);
+    }.
 
 // Agent search for goal position
 +!decision_maker : state(State) & 
@@ -228,6 +211,9 @@
     if (Xg == 0 && Yg == 0) {
         // When agent is on goal and has an task that fits the direction of the block, submit. Otherwise, rotate clockwise
         if(not(Task == null)) {
+            // Update attachment count and submit
+            ?attached(Count);
+            -+attached(Count-1);
             !action(submit, Task);
         }
         else {

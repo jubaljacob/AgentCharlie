@@ -22,7 +22,20 @@
 +!failure_handler(rotate, _Result, Direction) : state(request_block) <- 
     -+state(explore).
 
-// If request failed, make belief to rotate otherwise
+// If request failed because blocked by other agent, move away from the dispenser/goal (5 steps)
+
+// If attach fails, because nothing to attach, request a block again [failed_target]
++!failure_handler(attach, failed_target, _Param) {
+    -+state(request_block);
+    !decision_maker.
+}
+
+// If attach fails, because held by other agent, try move around dispenser and let agent request later
++!failure_handler(attach, failed, _Param) {
+    -+state(move_to_dispenser);
+    !move_random;
+    !decision_maker.
+}
 
 
 

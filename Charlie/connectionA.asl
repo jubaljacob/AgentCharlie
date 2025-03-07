@@ -10,6 +10,7 @@ position(0,0).
 state(explore).
 move_axis(x).
 rotate_dir(cw).
+attached(0).
 
 /* Initial goals */
 
